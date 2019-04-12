@@ -14,4 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('customers','CustomersController');
+Auth::routes(['register' => false]);
+Route::resource('customers','CustomerController');
+Route::resource('groups','GroupController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

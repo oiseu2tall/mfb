@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Group;
 use Illuminate\Http\Request;
 
-class CustomersController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +25,7 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        //
+       //
     }
 
     /**
