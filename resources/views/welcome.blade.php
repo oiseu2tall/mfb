@@ -80,6 +80,8 @@
             @endif
 
             <div class="content">
+
+                <a href="{{route('groups.index')}}">Groups</a> <a href="{{route('customers.index')}}">Customers</a>
                 <div class="title m-b-md">
                     Laravel
                 </div>

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+  <div><a href="{{route('groups.create')}}">Create A New Group</a></div>
   <h1>All groups</h1>
   @foreach($groups as $group)
   <div>

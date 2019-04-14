@@ -8,7 +8,7 @@ class Group extends Model
 {
 
 	protected $fillable=['name', 'venue', 'meeting_day'];
-    public function customer()
+    public function customers()
     {
     	return $this->hasMany(Customer::class);
     }

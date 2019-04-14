@@ -102,4 +102,12 @@ class GroupController extends Controller
         session()->flash('message', 'This group has been deleted successfully');
         return redirect(route('groups.index'));
     }
+
+    public function groupCustomers(Group $group)
+    {
+
+        //$group = $this->$group->customers();
+    }
+
+
 }
