@@ -79,7 +79,13 @@ class GroupController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Group $group)
-    {
+    {   
+        $this->validate($request, [
+            'name' => 'required|min:3',
+            'venue' => 'required|min:10',
+            'meeting_day' => 'required|min:10'
+        ]);
+
         $group->name = $request->name;
         $group->venue = $request->venue;
         $group->meeting_day = $request->meeting_day;
@@ -103,11 +109,6 @@ class GroupController extends Controller
         return redirect(route('groups.index'));
     }
 
-    public function groupCustomers(Group $group)
-    {
-
-        //$group = $this->$group->customers();
-    }
 
 
 }

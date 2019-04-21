@@ -17,6 +17,7 @@ Route::get('/', function () {
 Auth::routes(['register' => false]);
 Route::resource('customers','CustomerController');
 Route::resource('groups','GroupController');
+Route::resource('loans','LoanController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

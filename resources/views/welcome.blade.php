@@ -81,7 +81,11 @@
 
             <div class="content">
 
-                <a href="{{route('groups.index')}}">Groups</a> <a href="{{route('customers.index')}}">Customers</a>
+                <a href="{{route('groups.index')}}">Groups</a> 
+                <a href="{{route('customers.index')}}">Customers</a>
+
+                <a href="{{route('loans.index')}}">Loan Types</a>
+
                 <div class="title m-b-md">
                     Laravel
                 </div>

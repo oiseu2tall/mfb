@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h2>Add a post</h2>
+<h2>Add a Group</h2>
 @if($errors->all())
   <div>
     @foreach($errors->all() as $error)
