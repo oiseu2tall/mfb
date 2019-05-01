@@ -17,7 +17,7 @@ class CreateGroupsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('meeting_day', 20);
-            $table->string('venue', 100);
+            $table->text('venue');
             $table->timestamps();
         });
     }

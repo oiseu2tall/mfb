@@ -21,7 +21,7 @@ class CreateCustomersTable extends Migration
             $table->string('phone', 20);
             $table->string('email', 50)->unique()->nullable();
             $table->date('dateOfBirth');
-            $table->bigInteger('group_id');
+            $table->bigInteger('group_id')->unsigned();
             $table->foreign('group_id')
             ->references('id')->on('groups');
 

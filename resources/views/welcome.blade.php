@@ -86,6 +86,8 @@
 
                 <a href="{{route('loans.index')}}">Loan Types</a>
 
+                <a href="{{route('credits.index')}}">Loan Requests</a>
+
                 <div class="title m-b-md">
                     Laravel
                 </div>

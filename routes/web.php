@@ -18,6 +18,8 @@ Auth::routes(['register' => false]);
 Route::resource('customers','CustomerController');
 Route::resource('groups','GroupController');
 Route::resource('loans','LoanController');
+Route::resource('credits','CreditController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

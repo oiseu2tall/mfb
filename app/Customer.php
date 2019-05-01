@@ -12,4 +12,9 @@ class Customer extends Model
     return $this->belongsTo(Group::class);
 	}
 
+	public function credits()
+    {
+    	return $this->hasMany(Credit::class);
+    }
+    
 }

@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session()->has('message'))
+  <div>
+    {{session()->get('message')}}
+  </div>
+@endif
 <div>
   <div>
     <h2>{{$customer->first_name}} {{$customer->surname}}</h2>
@@ -25,11 +30,13 @@
     @foreach($groups as $group)
     @if($customer->group_id==$group->id)
     <p>
-      {{$group->name}}
+      {{$group->name}} 
+      
     </p>
     @endif
     @endforeach
 
+<p>{{$customer->group->name}} </p>
 
 
   </div>
@@ -40,5 +47,31 @@
           <button type="submit">Delete</button>
         </form>
 
+<?php 
+    session(['customerid' => $customer->id]);
+    $x= session('customerid');
+
+?>
+    <div>
+
+      <a href="{{route('credits.create')}}">Request for loan {{$x}}</a>
+
+    </div>
+
+
+<div>
+    <h2>Customer Loans</h2>
+    <ul>
+@foreach($customer->credits as $credit)
+  <li>
+    <a href="{{route('credits.show', $credit->id)}}">{{$credit->loan->name}} {{$credit->loan->principal}}</a>
+  </li>
+@endforeach
+</ul>
 </div>
+    
+
+</div>
+
+
 @stop

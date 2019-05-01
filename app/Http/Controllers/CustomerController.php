@@ -71,7 +71,7 @@ class CustomerController extends Controller
     public function show(Customer $customer)
     {
         $groups = Group::all('id', 'name');
-        //$groups = Group::where('Group.id=$customer->group_id');
+        
         return view('customers.show', compact('customer'), compact('groups'));
     }
 
