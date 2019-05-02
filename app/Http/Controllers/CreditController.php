@@ -57,6 +57,7 @@ class CreditController extends Controller
             ]);
         $credit->save();
         session()->flash('message', 'This Loan Request has been created successfully');
+        session()->forget('customerid');
         return redirect(route('credits.index'));
     }
 

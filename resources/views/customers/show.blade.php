@@ -47,14 +47,9 @@
           <button type="submit">Delete</button>
         </form>
 
-<?php 
-    session(['customerid' => $customer->id]);
-    $x= session('customerid');
-
-?>
     <div>
 
-      <a href="{{route('credits.create')}}">Request for loan {{$x}}</a>
+      <a href="{{route('credits.create')}}" onclick="{{session(['customerid' => $customer->id])}}">Request for loan {{session('customerid')}}</a>
 
     </div>
 

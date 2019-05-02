@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
   <div class="col-sm-8 offset-sm-2">
-<h2>Add a loan request</h2>
+<h2>Add a loan request </h2>
 @if($errors->all())
   <div class="alert alert-danger">
     @foreach($errors->all() as $error)
@@ -39,11 +39,12 @@
 
   </div>
 <?php $customer_id = session('customerid'); ?>
- <input name="customer_id" type="hidden" id="customer_id" value="{{$customer_id}}" /> {{$customer_id}}
-<?php session()->pull('customerid'); ?>
+ <input name="customer_id" type="hidden" id="customer_id" value="{{$customer_id}}" /> <p> {{$customer_id}}</p>
+
+<p>after here {{ session('customerid') }}</p>
   <div>
 
-    <button type="submit" class="btn btn-primary-outline">Create Loan Request</button>
+    <button type="submit" class="btn btn-primary-outline" >Create Loan Request</button>
   </div>
 </form>
 </div>
