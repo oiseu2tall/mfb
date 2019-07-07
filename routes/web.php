@@ -19,6 +19,7 @@ Route::resource('customers','CustomerController');
 Route::resource('groups','GroupController');
 Route::resource('loans','LoanController');
 Route::resource('credits','CreditController');
+Route::resource('repayments','RepaymentController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

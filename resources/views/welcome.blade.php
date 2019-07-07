@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>mfb</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -89,9 +89,9 @@
                 <a href="{{route('credits.index')}}">Loan Requests</a>
 
                 <div class="title m-b-md">
-                    Laravel
+                    Micro-Finance Lending
                 </div>
-
+            <!--
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
@@ -101,6 +101,7 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+            --> 
             </div>
         </div>
     </body>

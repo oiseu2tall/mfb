@@ -12,4 +12,9 @@ class Loan extends Model
     {
     	return $this->hasMany(Credit::class);
     }
+
+    public function repayments()
+    {
+    	return $this->hasMany(Repayment::class);
+    }
 }

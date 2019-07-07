@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Group;
+use App\Repayment;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller

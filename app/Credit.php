@@ -17,4 +17,9 @@ class Credit extends Model
 	{
     return $this->belongsTo(Loan::class);
 	}
+
+	public function repayments()
+    {
+    	return $this->hasMany(Repayment::class);
+    }
 }
