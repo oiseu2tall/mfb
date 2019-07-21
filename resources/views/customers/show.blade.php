@@ -63,14 +63,22 @@
 
 
         <h3>Repayments</h3>
- <ul>
+        <table>
+         <h4> <th>
+            <tr>
+              <td>DATE</td> <td>INSTALLMENT</td> <td>SAVINGS</td> <td>EXTRA SAVINGS</td> <td>BALANCE</td>
+            </tr>
+          </th></h4>
 @foreach($customer->repayments as $repayment)
-  <li>
-    <a href="{{route('repayments.show', $repayment->id)}}">{{$repayment->installment}} {{$repayment->payment_date}} {{$repayment->savings}}</a> {{$repayment->extra_savings}} {{$repayment->balance}}
-  </li>
+<tr>
+    <td><a href="{{route('repayments.show', $repayment->id)}}">{{$repayment->payment_date}} </a></td>
+    <td>{{$repayment->installment}}</td> 
+    <td>{{$repayment->savings}}</td> 
+    <td>{{$repayment->extra_savings}}</td> 
+    <td>{{$repayment->balance}}</td>
+  </tr>
 @endforeach
-</ul>
-
+</table>
 
 
 
