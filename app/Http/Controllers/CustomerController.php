@@ -6,6 +6,9 @@ use App\Customer;
 use App\Group;
 use App\Repayment;
 use Illuminate\Http\Request;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
+
 
 class CustomerController extends Controller
 {
@@ -48,18 +51,56 @@ class CustomerController extends Controller
             'dateOfBirth' => 'required',
             'phone' => 'required|min:6',
             'group_id' => 'required',
+            //'image_name' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            //'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         ]);
 
+          //$imageName = time().'.'.request()->image->getClientOriginalExtension();
+        $imageName = time().'.'.request()->image->getClientOriginalExtension();
 
-        Customer::create([
+
+          //$imagename = request()->file('image')->store('images');
+            
+           //$request->file('image')->storeAs('images', $request->customer()->id,
+
+        request()->image->move(storage_path('/app/public/images'), $imageName);
+        //request()->image->move(public_path('images'));
+            
+      /**
+       Customer::create([
+
+           
             'first_name' => $request->first_name,
             'surname' => $request->surname,
             'dateOfBirth' => $request->dateOfBirth,
             'phone' => $request->phone,
+            'email' => $request->email,
             'address' => $request->address,
-            'group_id' => $request->group_id
+            'group_id' => $request->group_id,
+            
+            //'image_name' => $request->file('image')->hashName()
+            //'image_name' => $request->file('image')->store('images'),
+            //'image_name' => $request->$imageName
         ]);
+
+        **/
+        $customer = new Customer();
+        $customer->first_name = $request->first_name;
+        $customer->surname = $request->surname;
+        $customer->dateOfBirth = $request->dateOfBirth;
+        $customer->phone = $request->phone;
+        $customer->email = $request->email;
+        $customer->address = $request->address;
+        $customer->group_id = $request->group_id;
+        $customer->image_name = $imageName;
+
+        $customer->save();
+
+        
+        
+
         return redirect(route('customers.index'));
     }
 
@@ -105,6 +146,7 @@ $this->validate($request, [
             'dateOfBirth' => 'required',
             'phone' => 'required|min:6',
             'group_id' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         ]);
         $customer->first_name = $request->first_name;

@@ -15,9 +15,13 @@
   </div>
 @endif
 
-<form action="{{route('customers.update', $customer->id)}}" method="post">
+<form action="{{route('customers.update', $customer->id)}}" method="post" enctype="multipart/form-data">
   @csrf
   @method('put')
+  <div class="col-md-6">
+    <label for="image">Image</label>
+    <input type="file" name="image" class="form-control">
+  </div>
   <div>
     <label for="first_name">First Name</label>
     <input type="text" name="first_name" id="first_name" value='{{$customer->first_name}}'>

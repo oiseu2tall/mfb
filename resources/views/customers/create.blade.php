@@ -8,8 +8,12 @@
     @endforeach
   </div>
 @endif
-<form action="{{route('customers.store')}}" method="post">
+<form action="{{route('customers.store')}}" method="post" enctype="multipart/form-data">
   @csrf
+  <div class="col-md-6">
+    <label for="image">Image</label>
+    <input type="file" name="image" class="form-control">
+  </div>
   <div class="form-group">
     <label for="first_name">first Name</label>
     <input type="text" name="first_name" id="first_name">
@@ -22,7 +26,7 @@
     <label for="address">Address</label>
     <input name="address" id="address"/>
   </div>
-
+<input name="image_name" type="hidden" id="image_name" />
   <div class="form-group">
     <label for="phone">Phone</label>
     <input name="phone" id="phone"/>

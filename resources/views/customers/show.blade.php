@@ -21,6 +21,7 @@
 <div>
   <div>
     <h2>{{$customer->first_name}} {{$customer->surname}}</h2>
+    <img src="{{ asset('storage/images/'.$customer->image_name) }}" height="100px" width="100px">
   </div>
   <div>
     <p>
