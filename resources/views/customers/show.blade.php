@@ -18,58 +18,79 @@
 @endif
 
 
-<div>
-  <div>
-    <h2>{{$customer->first_name}} {{$customer->surname}}</h2>
-    <img src="{{ asset('storage/images/'.$customer->image_name) }}" height="100px" width="100px">
-  </div>
-  <div>
-    <p>
-      {{$customer->address}}
-    </p>
-    <p>
-      {{$customer->phone}}
-    </p>
-    <p>
-      {{$customer->dateOfBirth}}
-    </p>
-    <p>
-      {{$customer->email}}
-    </p>
-    <p>
-      {{$customer->group_id}}
-    </p>
+@section('content')
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <strong>
+                        <i class="fas fa-tachometer-alt"></i> CUSTOMER INFORMATION
+                    </strong>
+                </div><!--card-header-->
 
-    @foreach($groups as $group)
-    @if($customer->group_id==$group->id)
-    <p>
-      {{$group->name}} 
-      
-    </p>
-    @endif
-    @endforeach
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col col-sm-4 order-1 order-sm-2  mb-4">
+                            <div class="card mb-4 bg-light">
+            <img class="card-img-top" src="{{ asset('storage/images/'.$customer->image_name) }}" alt="Profile Picture" width="250px">
 
-<p>{{$customer->group->name}} </p>
-  </div>
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                      {{$customer->surname}} {{$customer->first_name}}<br/>
+                                    </h3>
 
+                                    <p class="card-text">
+                                        <small>
+                                            <i class="fas fa-envelope"></i> {{$customer->email}}<br/>
+                                            <i class="fas fa-calendar-check"></i> {{$customer->group->name}}
+                                        </small>
+                                    </p>
 
-<a href="{{route('customers.edit', $customer->id)}}">Edit</a>
-        <form onsubmit="return confirm('Are you sure you want to delete this customer?')" method="post" action="{{route('customers.destroy', $customer->id)}}">
+    <p class="card-text">
+
+                                        <a href="{{route('customers.edit', $customer->id)}}" class="btn btn-info btn-sm mb-1">
+                                            <i class="fas fa-user-circle">edit</i> 
+                                        </a>&nbsp;
+
+                                        <form onsubmit="return confirm('Are you sure you want to delete this customer?')" method="post" action="{{route('customers.destroy', $customer->id)}}">
           @csrf
           @method('delete')
-          <button type="submit">Delete</button>
+          <button type="submit" class="btn btn-danger btn-sm mb-1">Delete</button>
+          <i class="fas fa-user-secret"></i> 
         </form>
+                                        
+     </p>
+                                </div>
+                            </div>
 
+                            <div class="card mb-4">
+                                <div class="card-header">Header</div>
+                                <div class="card-body">
+                                    <h4 class="card-title">Info card title</h4>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div><!--card-->
+                        </div><!--col-md-4-->
 
+                        <div class="col-md-8 order-2 order-sm-1">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            Repayments
+                                        </div><!--card-header-->
 
+                                        <div class="card-body">
+                                            
+<div class="row">
+  <div class="col-sm-12">
 
-        <h3>Repayments</h3>
-        <table>
-         <h4> <th>
+        <table class="table table-stripped">
+          <th>
             <tr>
               <td>DATE</td> <td>INSTALLMENT</td> <td>SAVINGS</td> <td>EXTRA SAVINGS</td> <td>BALANCE</td>
             </tr>
-          </th></h4>
+          </th>
 @foreach($customer->repayments as $repayment)
 <tr>
     <td><a href="{{route('repayments.show', $repayment->id)}}">{{$repayment->payment_date}} </a></td>
@@ -80,76 +101,95 @@
   </tr>
 @endforeach
 </table>
-
-
-
-    <div>
-
-      <a href="{{route('credits.create')}}" onclick="{{session(['customerid' => $customer->id])}}">Request for loan {{session('customerid')}}</a>
-
-    </div>
-
-
-<div>
-    <h2>Customer Loans</h2>
-    <ul>
-@foreach($customer->credits as $credit)
-  <li>
-    <a href="{{route('credits.show', $credit->id)}}">{{$credit->loan->name}} {{$credit->loan->principal}}</a>
-  </li>
-
-
-
-<form action="{{route('repayments.store')}}" method="post">
-  @csrf
-  <div class="form-group">
-    <label for="name">Repayment Installment</label>
-    <input type="text" class="form-control" name="installment" id="installment">
-  </div>
-
-  <div class="form-group">
-    <label for="name">Savings</label>
-    <input type="text" class="form-control" name="savings" id="savings">
-  </div>
-
-<div class="form-group">
-    <label for="name">extra savings</label>
-    <input type="text" class="form-control" name="extra_savings" id="extra_savings">
 </div>
-<div class="form-group">
-    <label for="name">Payment date</label>
-    <input type="text" class="form-control" name="payment_date" id="payment_date">
-  </div>
 
-
-<div>
-
- <input name="customer_id" type="hidden" id="customer_id" value="{{$credit->customer_id}}" />
- <input name="loan_id" type="hidden" id="loan_id" value="{{$credit->loan_id}}" />
- <input name="credit_id" type="hidden" id="credit_id" value="{{$credit->id}}" />
-
-
-
-  </div>
-
-
-
-<div>
-    <button type="submit" class="btn btn-primary-outline">Add a Repayment</button>
-  </div>
-</form>
-
-
-
-
-@endforeach
-</ul>
 </div>
 
 
 
 
-</div>
+
+                                        </div><!--card-body-->
+                                        <a href="{{route('credits.create')}}" onclick="{{session(['customerid' => $customer->id])}}">Request for loan {{session('customerid')}}</a>
+
+                                    </div><!--card-->
+
+                                </div><!--col-md-6-->
+                            </div><!--row-->
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            Item
+                                        </div><!--card-header-->
+
+                                        <div class="card-body">
+                                            2Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non qui facilis deleniti expedita fuga ipsum numquam aperiam itaque cum maxime.
+                                        </div><!--card-body-->
+                                    </div><!--card-->
+                                </div><!--col-md-6-->
+                            </div><!--row-->
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            Item
+                                        </div><!--card-header-->
+
+                                        <div class="card-body">
+                                            3Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non qui facilis deleniti expedita fuga ipsum numquam aperiam itaque cum maxime.
+                                        </div><!--card-body-->
+                                    </div><!--card-->
+                                </div><!--col-md-6-->
+
+                                <div class="col">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            Item
+                                        </div><!--card-header-->
+
+                                        <div class="card-body">
+                                           4 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non qui facilis deleniti expedita fuga ipsum numquam aperiam itaque cum maxime.
+                                        </div><!--card-body-->
+                                    </div><!--card-->
+                                </div><!--col-md-6-->
+
+                                <div class="w-100"></div>
+
+                                <div class="col">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            Item
+                                        </div><!--card-header-->
+
+                                        <div class="card-body">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non qui facilis deleniti expedita fuga ipsum numquam aperiam itaque cum maxime.
+                                        </div><!--card-body-->
+                                    </div><!--card-->
+                                </div><!--col-md-6-->
+
+                                <div class="col">
+                                    <div class="card mb-4">
+                                        <div class="card-header">
+                                            Item
+                                        </div><!--card-header-->
+
+                                        <div class="card-body">
+                                            5Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non qui facilis deleniti expedita fuga ipsum numquam aperiam itaque cum maxime.
+                                        </div><!--card-body-->
+                                    </div><!--card-->
+                                </div><!--col-md-6-->
+                            </div><!--row-->
+                        </div><!--col-md-8-->
+                    </div><!-- row -->
+                </div> <!-- card-body -->
+            </div><!-- card -->
+        </div><!-- row -->
+    </div><!-- row -->
+@endsection
+
 
 
 @stop
