@@ -180,7 +180,7 @@ $this->validate($request, [
             'phone' => 'required|min:6',
             'group_id' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'image_name' => 'required',
+            //'image_name' => 'required',
 
         ]);
 
