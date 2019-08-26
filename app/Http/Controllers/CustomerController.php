@@ -183,7 +183,7 @@ $this->validate($request, [
             //'image_name' => 'required',
 
         ]);
-
+    
     $imageName = time().'.'.request()->image->getClientOriginalExtension();
     request()->image->move(storage_path('/app/public/images'), $imageName);
 
