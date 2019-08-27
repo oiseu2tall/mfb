@@ -1,8 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.form')
 @section('content')
-<h2>Update the group</h2>
+<div class="row">
+  <div class="col-sm-8 offset-sm-2">
 @if($errors->all())
-  <div>
+  <div class="alert alert-danger">
     @foreach($errors->all() as $error)
     <li>{{$error}}</li>
     @endforeach
@@ -15,9 +16,34 @@
   </div>
 @endif
 
-<form action="{{route('groups.update', $group->id)}}" method="post">
+<form action="{{route('groups.update', $group->id)}}" method="post" class="register">
   @csrf
   @method('put')
+<h1>Edit Group</h1>
+<fieldset class="row1">
+                <legend>Group Information
+                </legend>
+                  <label class="obinfo">* obligatory fields
+                    </label>
+                <p>
+                    <label>Name *
+                    </label>
+    <input type="text" name="name" id="name" value='{{$group->name}}' class="long"/>
+                    <label>Meeting Days *
+                    </label>
+    <input type="text" name="meeting_day" id="meeting_day" value='{{$group->meeting_day}}'/>
+                 </p>
+                 <p>
+                  <label>Venue *
+                    </label>
+    <input type="text" name="venue" id="venue" value='{{$group->venue}}' class="long"/>
+                 </p>
+
+  </fieldset>
+
+<div><button class="button">Submit &raquo;</button></div>
+
+  <!--
   <div>
     <label for="name">Name</label>
     <input type="text" name="name" id="name" value='{{$group->name}}'>
@@ -33,6 +59,11 @@
   <div>
     <button type="submit">update the group</button>
   </div>
+-->
+
 </form>
+
+</div>
+    </div>
 @endsection
 

@@ -104,9 +104,7 @@
                     <input type="text" name="gphone" id="gphone" maxlength="11"/>
                 </p>
     </fieldset>
-
-
-
+    
 <div><button class="button">Submit &raquo;</button></div>
 </form>
 
