@@ -52,13 +52,17 @@ class CustomerController extends Controller
         
         $this->validate($request, [
             'first_name' => 'required|min:3',
+            'card_number' => 'required',
+            'guarantor_name' => 'required|min:3',
+            'guarantor_address' => 'required|min:3',
+            'guarantor_phone' => 'required|min:3',
             'address' => 'required|min:10',
             'surname' => 'required|min:3',
             'dateOfBirth' => 'required',
             'phone' => 'required|min:6',
             'group_id' => 'required',
             //'image_name' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
 
@@ -69,19 +73,44 @@ $image = $this->imagecreatefromjpegexif(request()->image);
 
 imagejpeg($image, storage_path('app/public/images/'.$filename), 60);
 
-        
+       /** 
         $customer = new Customer();
         $customer->first_name = $request->first_name;
+        $customer->middle_name = $request->middle_name;
         $customer->surname = $request->surname;
+        $customer->card_number = $request->card_number;
+        $customer->aka = $request->aka;
         $customer->dateOfBirth = $request->dateOfBirth;
         $customer->phone = $request->phone;
         $customer->email = $request->email;
         $customer->address = $request->address;
+        $customer->guarantor_name = $request->guarantor_name;
+        $customer->guarantor_address = $request->guarantor_address;
+        $customer->guarantor_phone = $request->guarantor_phone;
         $customer->group_id = $request->group_id;
         $customer->image_name = $filename;
+    */
+
+   $customer = new Customer([
+            'first_name' => $request->get('first_name'),
+            'middle_name' => $request->get('middle_name'),
+            'surname' => $request->get('surname'),
+            'aka' => $request->get('aka'),
+            'dateOfBirth' => $request->get('dateOfBirth'),
+            'phone' => $request->get('phone'),
+            'email' => $request->get('email'),
+            'address' => $request->get('address'),
+            'guarantor_name' => $request->get('guarantor_name'),
+            'guarantor_address' => $request->get('guarantor_address'),
+            'guarantor_phone' => $request->get('guarantor_phone'),
+            'card_number' => $request->get('card_number'),
+            'group_id' => $request->get('group_id'),
+            'image_name' => $filename,
+        ]);
+
 
         $customer->save();
-
+        session()->flash('message', 'The Customer has been created successfully');
         return redirect(route('customers.index'));
     }
 
@@ -108,32 +137,7 @@ private function imagecreatefromjpegexif($filename)
     }
         
 
-/**
-    // Compress image
-private function compressimage($source, $destination, $quality) {
 
-  $info = getimagesize($source);
-
-  if ($info['mime'] == 'image/jpeg') 
-    $image = imagecreatefromjpeg($source);
-
-  elseif ($info['mime'] == 'image/gif') 
-    $image = imagecreatefromgif($source);
-
-elseif ($info['mime'] == 'image/jpg') 
-    $image = imagecreatefromjpg($source);
-
-  elseif ($info['mime'] == 'image/png') 
-    $image = imagecreatefrompng($source);
-
-elseif ($info['mime'] == 'image/svg') 
-    $image = imagecreatefromsvg($source);
-
-  imagejpeg($image, $destination, $quality);
-
-}
-
-**/
 
 
 
@@ -174,28 +178,45 @@ elseif ($info['mime'] == 'image/svg')
         
 $this->validate($request, [
             'first_name' => 'required|min:3',
+            'card_number' => 'required',
+            'guarantor_name' => 'required|min:3',
+            'guarantor_address' => 'required|min:3',
+            'guarantor_phone' => 'required|min:3',
             'address' => 'required|min:10',
             'surname' => 'required|min:3',
             'dateOfBirth' => 'required',
             'phone' => 'required|min:6',
             'group_id' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             //'image_name' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
         ]);
-    
-    $imageName = time().'.'.request()->image->getClientOriginalExtension();
-    request()->image->move(storage_path('/app/public/images'), $imageName);
 
+    if ($request->hasFile('image')) {
+    //$oldphoto = storage_path('app/public/images/'.$customer->image_name);
+    unlink(storage_path('app/public/images/'.$customer->image_name));
+$filename = time().'.jpg';
+
+$image = $this->imagecreatefromjpegexif(request()->image);
+
+imagejpeg($image, storage_path('app/public/images/'.$filename), 60);
+$customer->image_name = $filename;
+    }
 
         $customer->first_name = $request->first_name;
+        $customer->middle_name = $request->middle_name;
         $customer->surname = $request->surname;
-        $customer->email = $request->email;
+        $customer->card_number = $request->card_number;
+        $customer->aka = $request->aka;
         $customer->dateOfBirth = $request->dateOfBirth;
-            $customer->phone = $request->phone;
-            $customer->address = $request->address;
-            $customer->group_id = $request->group_id;
-            $customer->image_name = $imageName;
+        $customer->phone = $request->phone;
+        $customer->email = $request->email;
+        $customer->address = $request->address;
+        $customer->guarantor_name = $request->guarantor_name;
+        $customer->guarantor_address = $request->guarantor_address;
+        $customer->guarantor_phone = $request->guarantor_phone;
+        $customer->group_id = $request->group_id;
+        
 
         $customer->save();
         session()->flash('message', 'This customer has been updated successfully');

@@ -20,13 +20,13 @@
                 </legend>
                   <label class="obinfo">* obligatory fields
                     </label>
-                <p>
-                    <label>Passport *
+                    <label for="image">Passport *
                     </label>
                     <input type="file" name="image" class="long"/>
+                  <p>  
                     <label>Card Number *
                     </label>
-                    <input type="text" name="surname" id="surname"/>
+                    <input type="text" name="card_number" id="card_number"/>
                  </p>
                   <p>
                     <label>Surname *
@@ -91,17 +91,17 @@
                 <p>
                     <label>Guarantor Name*
                     </label>
-                    <input type="text" name="gname" id="gname"/>
+                    <input type="text" name="guarantor_name" id="guarantor_name"/>
                 </p>
                 <p>
                     <label>Guarantor Address*
                     </label>
-                    <textarea name="gaddress" id="gaddress"></textarea>
+                    <textarea name="guarantor_address" id="guarantor_address"></textarea>
                 </p>
                 <p>
                     <label>Guarantor Phone*
                     </label>
-                    <input type="text" name="gphone" id="gphone" maxlength="11"/>
+        <input type="text" name="guarantor_phone" id="guarantor_phone" maxlength="11"/>
                 </p>
     </fieldset>
     

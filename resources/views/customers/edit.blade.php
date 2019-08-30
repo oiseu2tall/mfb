@@ -100,17 +100,17 @@
                 <p>
                     <label>Guarantor Name*
                     </label>
-                    <input type="text" name="gname" id="gname" value='{{$customer->gname}}'/>
+                    <input type="text" name="guarantor_name" id="guarantor_name" value='{{$customer->guarantor_name}}'/>
                 </p>
                 <p>
                     <label>Guarantor Address*
                     </label>
-                    <input type="text" name="gaddress" id="gaddress" value='{{$customer->gaddress}}'/>
+                    <textarea name="guarantor_address" id="guarantor_address">{{$customer->guarantor_address}}</textarea>
                 </p>
                 <p>
                     <label>Guarantor Phone*
                     </label>
-                    <input type="text" name="gphone" id="gphone" maxlength="11" value='{{$customer->gphone}}'/>
+                    <input type="text" name="guarantor_phone" id="guarantor_phone" maxlength="11" value='{{$customer->guarantor_phone}}'/>
                 </p>
     </fieldset>
 
