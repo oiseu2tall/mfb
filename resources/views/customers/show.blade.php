@@ -13,7 +13,7 @@
 <div class="body_bg">
     <div class="body">
 <div class="left_resize block">
-        <div class="left ">
+        <div class="left">
           <h2><span>{{$customer->surname}} </span>{{$customer->middle_name}} {{$customer->first_name}}</h2>
           <img src="{{ asset('storage/images/'.$customer->image_name) }}" alt="Profile Picture" width="150" class="floated" />
 <h4>Group: <a href="{{route('groups.show', $customer->group_id)}}">{{$customer->group->name}}</a></h4>

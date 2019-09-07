@@ -446,7 +446,8 @@ h1 small {
     margin:5px 0 10px 0;
 }
 .body h2 span {
-    color:#35b2ef;
+    /*color:#35b2ef;*/
+    color: #abda0f;
 }
 .body p {
     font:normal 12px Arial, Helvetica, sans-serif;

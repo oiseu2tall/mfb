@@ -12,7 +12,7 @@
           <td>Customer Name</td>
           <td>Loan Type</td>
           <td>amount</td>
-          <td colspan = 2>Actions</td>
+          <td>Actions</td>
         </tr>
     </thead>
     <tbody>
@@ -24,13 +24,13 @@
             <td>{{$credit->loan->name}}</td>
             <td>{{$credit->loan->principal}}</td>
             <td>
-                <a href="{{ route('credits.edit', $credit->id)}}" class="btn btn-primary">Edit</a>
+                <a href="{{ route('credits.edit', $credit->id)}}" class="btn btn-info btn-sm mb-1">Edit</a>
             </td>
             <td>
                 <form onsubmit="return confirm('Are you sure you want to delete this customer?')" action="{{ route('credits.destroy', $credit->id)}}" method="post">
                   @csrf
                   @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Delete</button>
+                  <button class="btn btn-danger btn-sm mb-1" type="submit">Delete</button>
                 </form>
             </td>
         </tr>

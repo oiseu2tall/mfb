@@ -42,7 +42,7 @@ class RepaymentController extends Controller
         
         $this->validate($request, [
             'payment_date' => 'required',
-            'installment' => 'required',
+            'installment' => 'required|numeric',
             'customer_id' => 'required|numeric',
             'loan_id' => 'required',
             'credit_id' => 'required'
