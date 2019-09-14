@@ -16,8 +16,8 @@ class CreateRepaymentsTable extends Migration
         Schema::create('repayments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->decimal('installment', 10, 2);
-            $table->decimal('savings', 10, 2)->default(0);
-            $table->decimal('extra_savings', 10, 2)->default(0);
+            $table->decimal('savings', 10, 2)->default(0)->nullable();
+            $table->decimal('extra_savings', 10, 2)->default(0)->nullable();
             $table->date('payment_date');
             $table->decimal('balance', 10, 2)->nullable();
 

@@ -12,7 +12,7 @@
 
 <div class="body_bg">
     <div class="register">
-
+<!--
       <div class="right_resize">
         <div class="right block">
           <h2><span style="color: #abda0f;">Quick</span> Links</h2>
@@ -25,7 +25,7 @@
           </ul>
         </div>
   </div>
-
+-->
 <div class="row">
 
 <div class="right_resize">

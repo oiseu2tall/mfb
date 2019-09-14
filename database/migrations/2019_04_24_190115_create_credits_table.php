@@ -22,7 +22,7 @@ class CreateCreditsTable extends Migration
             $table->foreign('loan_id')
             ->references('id')->on('loans');
             $table->foreign('customer_id')
-            ->references('id')->on('customers');
+            ->references('id')->on('customers')->onDelete('cascade');
 
 
             $table->timestamps();

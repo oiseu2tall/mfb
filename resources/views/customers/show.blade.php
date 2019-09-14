@@ -57,7 +57,7 @@
                     <table class="table table-striped">
           <thead>
             <tr>
-              <td>DATE</td> <td>INSTALLMENT</td> <td>SAVINGS</td> <td>EXTRA SAVINGS</td> <td>Loan TYPE</td><td>BALANCE</td><td>ACTIONS</td>
+              <td>DATE</td> <td>INSTALLMENT</td> <td>SAVINGS</td> <td>EXTRA SAVINGS</td> <td>LOAN TYPE</td><td>BALANCE</td><td>ACTIONS</td>
             </tr>   
           </thead>
 @foreach($customer->repayments as $repayment)
@@ -106,12 +106,12 @@
                     <label>Installment *
                     </label>
                     <input type="text" name="installment" id="installment"/>
-                    <label>Savings *
+                    <label>Savings
                     </label>
                     <input type="text" name="savings" id="savings"/>
                 </p>
                 <p>
-                    <label>Extra savings *
+                    <label>Extra savings
                     </label>
                     <input type="text" name="extra_savings" id="extra_savings"/>
                     <label>Date *
@@ -125,7 +125,7 @@
 
                 
             </fieldset>
-            <div><button>Submit &raquo;</button></div>
+            <div><button style="background-color: #abda0f; color: #fff;">Submit &raquo;</button></div>
 </form>
 
 

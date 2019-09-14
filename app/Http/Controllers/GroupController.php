@@ -83,7 +83,7 @@ class GroupController extends Controller
         $this->validate($request, [
             'name' => 'required|min:3',
             'venue' => 'required|min:10',
-            'meeting_day' => 'required|min:10'
+            'meeting_day' => 'required'
         ]);
 
         $group->name = $request->name;
