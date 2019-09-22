@@ -1,4 +1,5 @@
-@extends('layouts.form')
+use Carbon\Carbon;
+@extends('layouts.app')
 @section('content')
 <div class="row">
   <div class="col-sm-8 offset-sm-2">
@@ -12,20 +13,21 @@
 
 <div class="body_bg">
     <div class="body">
+
 <div class="left_resize block">
         <div class="left">
           <h2><span>{{$customer->surname}} </span>{{$customer->middle_name}} {{$customer->first_name}}</h2>
-          <img src="{{ asset('storage/images/'.$customer->image_name) }}" alt="Profile Picture" width="150" class="floated" />
+          <img src="{{ asset('images/'.$customer->image_name) }}" alt="Profile Picture" width="150" class="floated" />
 <h4>Group: <a href="{{route('groups.show', $customer->group_id)}}">{{$customer->group->name}}</a></h4>
-<h4>Card Number: {{$customer->card_number}}</h4>
-<h4>Alias: {{$customer->aka}}</h4>
-<h4>Date of birth: {{$customer->dateOfBirth}}</h4>
-<h4>Address: {{$customer->address}}</h4>
-<h4>Email: {{$customer->email}}</h4>
-<h4>Phone: {{$customer->phone}}</h4>
-<h4>Guarantor name: {{$customer->guarantor_name}}</h4>
-<h4>Guarantor Address: {{$customer->guarantor_address}}</h4>
-<h4>Guarantor Phone: {{$customer->guarantor_phone}}</h4>
+<h6>Card Number: {{$customer->card_number}}</h6>
+<h6>Alias: {{$customer->aka}}</h6>
+<h6>Date of birth: {{$customer->dateOfBirth}}</h6>
+<h6>Address: {{$customer->address}}</h6>
+<h6>Email: {{$customer->email}}</h6>
+<h6>Phone: {{$customer->phone}}</h6>
+<h6>Guarantor name: {{$customer->guarantor_name}}</h6>
+<h6>Guarantor Address: {{$customer->guarantor_address}}</h6>
+<h6>Guarantor Phone: {{$customer->guarantor_phone}}</h6>
 
 
 
@@ -44,20 +46,19 @@
               <div class="left">
 
 
-<h2>Customer Loans</h2>
+<h1>Loan Disbursed to {{$customer->surname}} {{$customer->first_name}}</h1>
     <ul>
 @foreach($customer->credits as $credit)
-  <li class="bg">
-    <a href="{{route('credits.show', $credit->id)}}"><span class="loan">{{$credit->loan->name}} {{$credit->loan->principal}}</span></a>
+  <li style="list-style: none;">
+    <a href="{{route('credits.show', $credit->id)}}"><span class="loan" style="font-size: 25px;">{{$credit->loan->name}}</span></a> {{$credit->loan->principal}} Start Date:  {{Carbon\Carbon::parse($credit->start_date)->toFormattedDateString()}} End Date:  {{Carbon\Carbon::parse($credit->end_date)->toFormattedDateString()}}
  </li>
 
 
-
-          <h1>Repayment Details</h1>
-                    <table class="table table-striped">
+          <h3>Repayment Details</h3>
+                    <table class="table table-striped" style="display: inline-table;font-size: 12px;">
           <thead>
             <tr>
-              <td>DATE</td> <td>INSTALLMENT</td> <td>SAVINGS</td> <td>EXTRA SAVINGS</td> <td>LOAN TYPE</td><td>BALANCE</td><td>ACTIONS</td>
+              <td>DATE</td> <td>INSTALL</td> <td>SAVINGS</td> <td>EXTRA SAVS</td> <td>LOAN</td><td>BALANCE</td><td>ACTIONS</td>
             </tr>   
           </thead>
 @foreach($customer->repayments as $repayment)
@@ -71,18 +72,13 @@
     <td>{{$repayment->loan->name}}</td>
     <td>{{$repayment->balance}}</td>
     <td style="display:inline-flex;">
-    <a href="{{route('repayments.edit', $repayment->id)}}" class="btn btn-info btn-sm mb-1">Edit</a> &nbsp; &nbsp;
+    <a href="{{route('repayments.edit', $repayment->id)}}" class="btn btn-info btn-sm mb-2">Edit</a> &nbsp; &nbsp;
         <form onsubmit="return confirm('Are you sure you want to delete this payment?')" method="post" action="{{route('repayments.destroy', $repayment->id)}}">
           @csrf
           @method('delete')
-          <button type="submit" class="btn btn-danger btn-sm mb-1">Delete</button>
+          <button type="submit" class="btn btn-danger btn-sm mb-2">Delete</button>
         </form>
     </td>
-
-    <!--
-    <td><a href="{{route('repayments.edit', $repayment->id)}}">Edit </a> <a href="{{route('repayments.destroy', $repayment->id)}}">DELETE</a></td>
-    -->
-
     
   </tr>
 </tbody>
@@ -116,7 +112,7 @@
                     <input type="text" name="extra_savings" id="extra_savings"/>
                     <label>Date *
                     </label>
-                    <input type="text" name="payment_date" id="payment_date"/>
+                    <input type="date" name="payment_date" id="payment_date"/>
                     
                 </p>
                 <input name="customer_id" type="hidden" id="customer_id" value="{{$credit->customer_id}}" />
@@ -128,14 +124,14 @@
             <div><button style="background-color: #abda0f; color: #fff;">Submit &raquo;</button></div>
 </form>
 
-
+<div class="bg"></div>
 
 @endforeach
 </ul>
                 
-      </div>
+      
 
-
+ </div>
 
 
 </div><!--end left resise blk-->
@@ -146,14 +142,36 @@
         <div class="right block">
           <h2><span>Quick</span> Links</h2>
           <ul>
-            <li><a href="{{route('credits.create')}}" onclick="{{session(['customerid' => $customer->id])}}">Request for loan {{session('customerid')}}</a></li>
+            <li><a href="{{route('credits.create')}}" onclick="{{session(['customerid' => $customer->id])}}">Give Loan to {{$customer->surname}} {{$customer->middle_name}} {{$customer->first_name}} {{session('customerid')}}</a></li>
+            <li><a href="{{route('customers.create')}}">Create New Customer</a></li>
             <li><a href="{{route('groups.index')}}">Groups</a></li>
             <li><a href="{{route('customers.index')}}">Customers</a></li>
-            <li><a href="{{route('loans.index')}}">Loan Types</a></li>
-            <li><a href="{{route('credits.index')}}">Loan Requests</a></li>
+            <li><a href="{{route('loans.index')}}">All Loans Types</a></li>
+            
           </ul>
         </div>
 
+
+
+
+            <div class="right block">
+          <h2><span>Search</span></h2>
+          <div class="search">
+
+
+
+<form action="/search" method="post" role="search">
+    {{ csrf_field() }}
+    <div class="input-group">
+        <input type="text" class="form-control" name="q" id="q" placeholder="Customer name" maxlength="50">
+      <button type="submit" class="btn btn-info btn-sm mb-1">Submit</button>
+    </div>
+</form>
+
+          </div>
+          <div class="clr"></div>
+        </div>
+</div><!--end right resize block-->
 
 
 
@@ -165,6 +183,8 @@
 
     </div>
         </div>
+        
+
 @endsection
 
 

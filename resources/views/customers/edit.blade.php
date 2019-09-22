@@ -1,4 +1,4 @@
-@extends('layouts.form')
+@extends('layouts.app')
 @section('content')
 <div class="row">
   <div class="col-sm-8 offset-sm-2">
@@ -28,7 +28,7 @@
                   <label class="obinfo">* obligatory fields
                     </label>
                 <p>
-                    <label>Passport *
+                    <label>Photo *
                     </label>
                     <input type="file" name="image" class="long"/>
                     <label>Card Number *
@@ -60,7 +60,8 @@
                 <p>
                     <label>Date of birth *
                     </label>
-<input type="text" name="dateOfBirth" id="dateOfBirth"value='{{$customer->dateOfBirth}}'/>
+<input type="date" name="dateOfBirth" id="dateOfBirth" value='{{$customer->dateOfBirth}}'
+max="2001-12-31"/>
                 </p>
                 <p>
                     <label>Address *
@@ -82,7 +83,7 @@
                     <label>Group *
                     </label>
                     <select name="group_id" id="group_id">
-                        @foreach($groups as $group)
+                        @foreach($groups->sortBy('name') as $group)
         @if($group->id==$customer->group_id)
         <option value='{{ $group->id }}' selected>{{$group->name}}</option>
         @else

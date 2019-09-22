@@ -26,11 +26,11 @@ class CreateRepaymentsTable extends Migration
             $table->bigInteger('credit_id')->unsigned();
 
             $table->foreign('loan_id')
-            ->references('id')->on('loans');
+            ->references('id')->on('loans')->onDelete('cascade');
             $table->foreign('customer_id')
-            ->references('id')->on('customers');
+            ->references('id')->on('customers')->onDelete('cascade');
              $table->foreign('credit_id')
-            ->references('id')->on('credits');
+            ->references('id')->on('credits')->onDelete('cascade');
 
             $table->timestamps();
         });

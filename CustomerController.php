@@ -6,8 +6,6 @@ use App\Customer;
 use App\Group;
 use App\Repayment;
 use App\Credit;
-use App\Loan;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
@@ -68,7 +66,7 @@ class CustomerController extends Controller
             'phone' => 'required|min:6',
             'group_id' => 'required',
             //'image_name' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4048'
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
 
@@ -194,23 +192,13 @@ $this->validate($request, [
             'phone' => 'required|min:6',
             'group_id' => 'required',
             //'image_name' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4048'
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
         ]);
 
-    if ($request->hasFile('image') && file_exists(public_path('images/'.$customer->image_name))) {
+    if ($request->hasFile('image')) {
     //$oldphoto = public_path('images/'.$customer->image_name);
     unlink(public_path('images/'.$customer->image_name));
-$filename = time().'.jpg';
-
-$image = $this->imagecreatefromjpegexif(request()->image);
-
-imagejpeg($image, public_path('images/'.$filename), 60);
-$customer->image_name = $filename;
-    }
-elseif ($request->hasFile('image') && !file_exists(public_path('images/'.$customer->image_name))) {
-    //$oldphoto = public_path('images/'.$customer->image_name);
-   // unlink(public_path('images/'.$customer->image_name));
 $filename = time().'.jpg';
 
 $image = $this->imagecreatefromjpegexif(request()->image);

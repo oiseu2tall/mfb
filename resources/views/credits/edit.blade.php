@@ -1,9 +1,12 @@
+
+
 @extends('layouts.app')
 @section('content')
-<h2>Update the credit</h2>
+<div class="row">
+  <div class="col-sm-8 offset-sm-2">
 @if($errors->all())
-  <div>
-    @foreach($errors->all() as $error)
+  <div class="alert alert-danger">
+@foreach($errors->all() as $error)
     <li>{{$error}}</li>
     @endforeach
   </div>
@@ -15,34 +18,48 @@
   </div>
 @endif
 
-<form action="{{route('credits.update', $credit->id)}}" onsubmit="return confirm('Are you sure you want to update this customer loan request?')" method="post">
+
+<form action="{{route('credits.update', $credit->id)}}" onsubmit="return confirm('Are you sure you want to update this customer loan request?')" method="post" class="register">
   @csrf
   @method('put')
-  <div>
-    <label for="start_date">Start Date</label>
-    <input type="text" name="start_date" id="start_date" value='{{$credit->start_date}}'>
-  </div>
-  <div>
-    <label for="end_date">End Date</label>
-    <input type="text" name="end_date" id="end_date" value='{{$credit->end_date}}'/>
-  </div>
-  
-  <div>
-  <label for="loan_id">loan Type</label>
-   <select name="loan_id" id="loan_id">
-@foreach($loans as $loan)
-        @if($loan->id==$credit->loan_id)
+<h1>Edit loan Request</h1>
+<fieldset class="row1">
+                <legend>Loan Request
+                </legend>
+                  <label class="obinfo">* obligatory fields
+                    </label>
+                <p>
+                    <label>Start Date *
+                    </label>
+                    <input type="date" name="start_date" id="start_date" 
+                    value='{{$credit->start_date}}'/>
+                    <label>End Date *
+                    </label>
+                    <input type="date" name="end_date" id="end_date" value='{{$credit->end_date}}' />
+                 </p>
+                 <p>
+                  <label>Loan Type *
+                    </label>
+                    <select name="loan_id" id="loan_id">
+                        <option selected>Select Loan Type
+                        </option>
+                        @foreach($loans as $loan)
+         @if($loan->id==$credit->loan_id)
         <option value='{{ $loan->id }}' selected>{{$loan->name}}</option>
         @else
         <option value='{{ $loan->id }}'>{{$loan->name}}</option>
         @endif
-@endforeach
-    </select>
-  </div>
+                        @endforeach
+                    </select>
+                 </p>
+  
+  </fieldset>
 
-  <div>
-    <button type="submit">update customer Loan request</button>
-  </div>
+<div><button class="button">Submit &raquo;</button></div>
 </form>
+        </div>
+    </div>
+
 @endsection
+  
 

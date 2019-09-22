@@ -20,7 +20,7 @@ class CreateCreditsTable extends Migration
             $table->bigInteger('customer_id')->unsigned();
             $table->bigInteger('loan_id')->unsigned();
             $table->foreign('loan_id')
-            ->references('id')->on('loans');
+            ->references('id')->on('loans')->onDelete('cascade');
             $table->foreign('customer_id')
             ->references('id')->on('customers')->onDelete('cascade');
 

@@ -6,6 +6,7 @@ use App\Repayment;
 use App\Credit;
 use App\Customer;
 use App\Loan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class RepaymentController extends Controller

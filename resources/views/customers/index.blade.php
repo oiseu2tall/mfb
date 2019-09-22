@@ -1,5 +1,5 @@
 
-@extends('layouts.form')
+@extends('layouts.app')
 @section('content')
 
 @if($errors->all())
@@ -11,7 +11,7 @@
 @endif
 
 <div class="body_bg">
-    <div class="register">
+    <div class="body" style="width: 1100px">
 <!--
       <div class="right_resize">
         <div class="right block">
@@ -26,26 +26,13 @@
         </div>
   </div>
 -->
+
 <div class="row">
 
-<div class="right_resize">
-        <div class="right block">
-          <h2><span style="color: #abda0f;">Quick</span> Links</h2>
-          <ul>
-            <li><a href="{{route('customers.create')}}">Create New Customer</a></li>
-            <li><a href="{{route('groups.index')}}">Groups</a></li>
-            <li><a href="{{route('customers.index')}}">Customers</a></li>
-            <li><a href="{{route('loans.index')}}">Loan Types</a></li>
-            <li><a href="{{route('credits.index')}}">Loan Requests</a></li>
-          </ul>
-        </div>
-  </div>
-
-<div class="col-sm-2">
+<div class="col-sm-8">
 
   <h4><a href="{{route('customers.create')}}">Create New Customer</a></h4>
   <h1 class="display-4">Customers</h1>
-
 
   <table class="table table-striped">
  
@@ -89,8 +76,45 @@
 
 
   </div>
+
+
+<div class="right_resize">
+        <div class="right block">
+          <h2><span style="color: #abda0f;">Quick</span> Links</h2>
+          <ul>
+            <li><a href="{{route('customers.create')}}">Create New Customer</a></li>
+            <li><a href="{{route('groups.index')}}">Groups</a></li>
+            <li><a href="{{route('customers.index')}}">Customers</a></li>
+            <li><a href="{{route('loans.index')}}">Loan Types</a></li>
+            <li><a href="{{route('credits.index')}}">All Disbursed Loans</a></li>
+          </ul>
+        </div>
+            <div class="right block">
+          <h2><span>Search</span></h2>
+          <div class="search">
+
+
+
+<form action="/search" method="post" role="search">
+    {{ csrf_field() }}
+    <div class="input-group">
+        <input type="text" class="form-control" name="q" id="q" placeholder="Customer name" maxlength="50">
+      <button type="submit" class="btn btn-info btn-sm mb-1">Submit</button>
+    </div>
+</form>
+
+          </div>
+          <div class="clr"></div>
+        </div>
+
+
+  </div>
+
+
+
+
+
 </div>
-<div class="bg"></div>
   
 
 
@@ -113,6 +137,8 @@
 
 </div>
 </div>
+
+
 
 
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Credit;
 use App\Customer;
 use App\Loan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CreditController extends Controller
@@ -43,22 +44,24 @@ class CreditController extends Controller
     {
         $this->validate($request, [
             'start_date' => 'required',
-            'end_date' => 'required',
-            'customer_id' => 'required|numeric',
-            'loan_id' => 'required'
+           //'end_date' => 'required',
+            //'customer_id' => 'required|numeric',
+            'loan_id' => 'required|numeric'
             
         ]);
-        
-        $credit = new Credit([
+        $enddate= Carbon::parse($request->get('start_date'))->addDays(168);
+        //$y=  $enddate->addDays(168);
+                $credit = new Credit([
             'start_date' => $request->get('start_date'),
-            'end_date' => $request->get('end_date'),
+            //'end_date' => $request->get('start_date')->addDays(30),
+            'end_date' => $enddate,
             'customer_id' => $request->get('customer_id'),
             'loan_id' => $request->get('loan_id')
             ]);
         $credit->save();
         session()->flash('message', 'This Loan Request has been created successfully');
         session()->forget('customerid');
-        return redirect(route('credits.index'));
+        return redirect(route('customers.show', $credit->customer_id));
     }
 
     /**
@@ -97,12 +100,14 @@ class CreditController extends Controller
         $loans = Loan::all('id', 'name');
         $this->validate($request, [
             'start_date' => 'required',
-            'end_date' => 'required',
-           // 'customer_id' => 'required',
-            'loan_id' => 'required'
+            //'end_date' => 'required',
+            //'customer_id' => 'required',
+            'loan_id' => 'required|numeric'
                  ]);
+        $enddate= Carbon::parse($request->get('start_date'))->addDays(168);
+        
         $credit->start_date = $request->start_date;
-        $credit->end_date = $request->end_date;
+        $credit->end_date = $enddate;
        // $credit->customer_id = $request->customer_id;
         $credit->loan_id = $request->loan_id;
         

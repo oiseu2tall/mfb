@@ -1,48 +1,4 @@
-<!--
-<div>
-  <div>
-  <h2>{{$loan->name}} Loan</h2>
-  </div>
-  <div>
-    <p>
-     description: {{$loan->description}}
-    </p>
-    <p>
-     duration: {{$loan->duration}} weeks
-    </p>
-    <p>
-     principal: {{$loan->principal}}
-    </p>
-    <p>
-     interest: {{$loan->interest}}
-    </p>
-    <p>
-      total savings: {{$loan->total_savings}}
-    </p>
-    <p>
-      weekly remittance: {{$loan->weekly_remittance}}
-    </p>
-    <p>
-      weekly savings: {{$loan->weekly_savings}}
-    </p>
-    <p>
-    interest rate:  {{$loan->interest_rate}}
-    </p>
-  </div>
 
-
-
-<a href="{{route('loans.edit', $loan->id)}}">Edit</a>
-        <form onsubmit="return confirm('Are you sure you want to delete this loan?')" method="post" action="{{route('loans.destroy', $loan->id)}}">
-          @csrf
-          @method('delete')
-          <button type="submit">Delete</button>
-        </form>
-
-
-
-</div>
--->
 
 @extends('layouts.form')
 @section('content')
@@ -102,8 +58,28 @@
             <li><a href="{{route('groups.index')}}">Groups</a></li>
             <li><a href="{{route('customers.index')}}">Customers</a></li>
             <li><a href="{{route('loans.index')}}">Loan Types</a></li>
-            <li><a href="{{route('credits.index')}}">Loan Requests</a></li>
+            <li><a href="{{route('credits.index')}}">All Disbursed Loans</a></li>
           </ul>
+        </div>
+
+
+        
+            <div class="right block">
+          <h2><span>Search</span></h2>
+          <div class="search">
+
+
+
+<form action="/search" method="post" role="search">
+    {{ csrf_field() }}
+    <div class="input-group">
+        <input type="text" class="form-control" name="q" id="q" placeholder="Customer name" maxlength="50">
+      <button type="submit" class="btn btn-info btn-sm mb-1">Submit</button>
+    </div>
+</form>
+
+          </div>
+          <div class="clr"></div>
         </div>
 
 

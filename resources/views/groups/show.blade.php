@@ -84,12 +84,33 @@
         <div class="right block">
           <h2><span>Quick</span> Links</h2>
           <ul>
-            <li><a href="{{route('credits.create')}}" onclick="{{session(['customerid' => $customer->id])}}">Request for loan {{session('customerid')}}</a></li>
+            <li><a href="{{route('groups.create')}}">Create New Group</a></li>
             <li><a href="{{route('groups.index')}}">Groups</a></li>
             <li><a href="{{route('customers.index')}}">Customers</a></li>
             <li><a href="{{route('loans.index')}}">Loan Types</a></li>
-            <li><a href="{{route('credits.index')}}">Loan Requests</a></li>
+            <li><a href="{{route('credits.index')}}">All Disbursed Loans</a></li>
           </ul>
+        </div>
+
+
+
+
+            <div class="right block">
+          <h2><span>Search</span></h2>
+          <div class="search">
+
+
+
+<form action="/search" method="post" role="search">
+    {{ csrf_field() }}
+    <div class="input-group">
+        <input type="text" class="form-control" name="q" id="q" placeholder="Customer name" maxlength="50">
+      <button type="submit" class="btn btn-info btn-sm mb-1">Submit</button>
+    </div>
+</form>
+
+          </div>
+          <div class="clr"></div>
         </div>
 
 

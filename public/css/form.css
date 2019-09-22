@@ -256,6 +256,12 @@ p.agreement label{
 }
 
 
+form.register input[type=date]
+{
+    border: 1px solid #E1E1E1;
+    height: 18px;
+}
+
 
 /*blue bottle*/
 
