@@ -18,9 +18,10 @@ class GroupController extends Controller
      */
     public function index()
     {
-        if(!Gate::allows('isAdmin') && !Gate::allows('isManager')){
+      /**  if(!Gate::allows('isAdmin') && !Gate::allows('isManager')){
             abort(403,"Sorry, You don't have permission to view this page");
         }
+        */
         $groups = Group::all();
         return view('groups.index', compact('groups'));
     }
@@ -32,8 +33,8 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
-        return view('groups.create');
+        $users = User::all();
+        return view('groups.create', compact('users'));
     }
 
     /**
@@ -46,14 +47,17 @@ class GroupController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:3',
-            'venue' => 'required|min:10'
+            'venue' => 'required|min:10',
+            'meeting_day' => 'required',
+            'user_id' => 'required',
+            //'user_id.required' => 'this is my custom error message for required'
         ]);
-        $user = Auth::user();
+        //$user = Auth::user();
         Group::create([
             'name' => $request->name,
             'venue' => $request->venue,
             'meeting_day' => $request->meeting_day,
-            'user_id' => $user->id,
+            'user_id' => $request->user_id,
         ]);
         return redirect(route('groups.index'));
     }
@@ -76,8 +80,9 @@ class GroupController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Group $group)
-    {
-        return view('groups.edit', compact('group'));
+    {   
+        $users = User::all();
+        return view('groups.edit', compact('group'), compact('users'));
     }
 
     /**

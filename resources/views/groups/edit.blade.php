@@ -50,6 +50,22 @@
                   <label>Venue *
                     </label>
     <input type="text" name="venue" id="venue" value='{{$group->venue}}' class="long"/>
+                
+                 @if(Auth::user()->can('isAdmin') || Auth::user()->can('isManager'))
+                  <label>Cash Officer *
+                    </label>        
+    <select name="user_id" id="user_id" class="select">
+      <option selected></option>
+      @foreach($users->sortBy('name') as $user)
+          @if($user->id==$group->user_id)
+      <option value="{{ $user->id }}" selected>{{$user->name}} {{$user->middle_name}} {{$user->first_name}}</option>
+          @else
+          <option value="{{ $user->id }}">{{$user->name}} {{$user->middle_name}} {{$user->first_name}}</option>
+          @endif
+      @endforeach
+      @endif
+                 </select> 
+
                  </p>
 
   </fieldset>

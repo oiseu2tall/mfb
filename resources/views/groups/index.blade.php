@@ -31,13 +31,20 @@
         </tr>
     </thead>
     <tbody>
-       @foreach($groups as $group)
+       @foreach($groups->sortBy('name') as $group)
     <tr>
-      
+
         <td><a href="{{route('groups.show', $group->id)}}"><span style="color:#35b2ef;">
           {{$group->name}}</span></a></td>
        <td>{{$group->meeting_day}}</td>
        <td>{{$group->venue}}</td>
+
+
+@if(
+        (Auth::user()->can('isAdmin'))
+            ||($group->user_id == Auth::user()->id)||
+                (Auth::user()->can('isManager'))
+                      )
         <td style="display: inline-flex;">
         <a href="{{route('groups.edit', $group->id)}}" class="btn btn-info btn-sm mb-1">Edit</a>&nbsp;
     <form onsubmit="return confirm('Are you sure you want to delete this group?')" method="post" action="{{route('groups.destroy', $group->id)}}">
@@ -46,6 +53,8 @@
           <button type="submit" class="btn btn-danger btn-sm mb-1">Delete</button>
         </form>
       </td>
+@endif
+
 </tr>
     
   @endforeach

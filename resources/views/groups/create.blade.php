@@ -23,6 +23,7 @@
                     <label>Name *
                     </label>
                     <input type="text" name="name" id="name" class="long"/>
+
                     <label>Meeting Days *
                     </label>
                     <select name="meeting_day" id="meeting_day" class="select"/>
@@ -35,11 +36,33 @@
 <option value="Saturday">Saturday</option>
 <option value="Sunday">Sunday</option>
                     </select>
+
+
+
+   
                  </p>
+
                  <p>
+
                   <label>Venue *
                     </label>
                     <textarea name="venue" id="venue"></textarea>
+
+@if(Auth::user()->can('isAdmin') || Auth::user()->can('isManager'))
+                  <label>Cash Officer *
+                    </label>        
+    <select name="user_id" id="user_id" class="select">
+      <option selected></option>
+      @foreach($users->sortBy('name') as $user)
+      <option value="{{ $user->id }}" >{{$user->name}} {{$user->middle_name}} {{$user->first_name}}</option>
+      @endforeach
+                 </select> 
+
+          @elseif(Auth::user()->can('isCashOfficer'))
+          <input type="hidden" name="user_id" id="user_id" value='{{Auth::user()->id}}' />
+          @endif
+
+
                  </p>
 
   </fieldset>

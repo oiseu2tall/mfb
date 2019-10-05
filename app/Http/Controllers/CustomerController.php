@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Customer;
+use App\User;
 use App\Group;
 use App\Repayment;
 use App\Credit;
@@ -39,12 +40,9 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $groups = Group::all('id', 'name');
+        $groups = Group::all();
        return view('customers.create', compact('groups'));
     }
-
-
-
 
 
 
@@ -250,6 +248,7 @@ $customer->image_name = $filename;
      */
     public function destroy(Customer $customer)
     {
+        unlink(public_path('images/'.$customer->image_name));
         $customer->delete();
         session()->flash('message', 'This customer has been deleted successfully');
         return redirect(route('customers.index'));

@@ -78,7 +78,22 @@
                         <option selected>Select Group
                         </option>
                         @foreach($groups->sortBy('name') as $group)
-        <option value="{{ $group->id }}" >{{$group->name}}</option>
+
+                        
+                        @if((Auth::user()->can('isCashOfficer'))
+                        &&($group->user_id == Auth::user()->id))
+                        
+                        
+        <option value="{{ $group->id }}" >{{$group->name}}</option>     
+
+      @elseif(Auth::user()->can('isAdmin') || Auth::user()->can('isManager'))
+    <option value="{{ $group->id }}" >{{$group->name}}</option>
+                      @endif
+<!--
+      @if(Gate::check('isAdmin') || Gate::check('isManager'))
+      <option value="{{ $group->id }}" >{{$group->name}}</option>
+       @endif
+-->
                         @endforeach
                     </select>
                 </p>
