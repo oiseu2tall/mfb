@@ -18,6 +18,9 @@ class CreateGroupsTable extends Migration
             $table->string('name');
             $table->string('meeting_day', 20);
             $table->text('venue');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+            ->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

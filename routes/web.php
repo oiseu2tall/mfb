@@ -14,12 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Auth::routes(['register' => false]);
-Route::resource('customers','CustomerController');
-Route::resource('groups','GroupController');
-Route::resource('loans','LoanController');
-Route::resource('credits','CreditController');
-Route::resource('repayments','RepaymentController');
+//Auth::routes(['register' => false]);
+Route::resource('customers','CustomerController')->middleware('auth');;
+Route::resource('groups','GroupController')->middleware('auth');;
+Route::resource('loans','LoanController')->middleware('auth');;
+Route::resource('credits','CreditController')->middleware('auth');;
+Route::resource('repayments','RepaymentController')->middleware('auth');;
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

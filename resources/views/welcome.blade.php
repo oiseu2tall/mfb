@@ -69,6 +69,7 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
+                        
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -92,6 +93,11 @@
                    Solution Micro Centre
                 </div>
         
+                <a href="{{route('customers.create')}}">Create Customer</a>
+
+                <a href="{{route('loans.create')}}">Create Loan Type</a>
+
+                <a href="{{route('groups.create')}}">Create Group</a>
             
 
 

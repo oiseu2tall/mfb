@@ -21,12 +21,12 @@ class CreateCustomersTable extends Migration
             $table->string('middle_name', 100);
             $table->string('surname', 100);
             $table->string('aka', 100)->nullable();
-            $table->text('address', 555);
+            $table->text('address');
             $table->string('phone', 20);
             $table->string('email', 50)->unique()->nullable();
             $table->date('dateOfBirth');
             $table->string('guarantor_name', 100);
-            $table->text('guarantor_address', 255);
+            $table->text('guarantor_address');
             $table->string('guarantor_phone', 20);
             $table->bigInteger('group_id')->unsigned();
             $table->foreign('group_id')

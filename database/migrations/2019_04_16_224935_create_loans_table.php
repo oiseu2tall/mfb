@@ -21,11 +21,11 @@ class CreateLoansTable extends Migration
             $table->text('description')->length(999);
             $table->integer('duration')->length(4);//in weeks e.g 4, 12, 24 
             $table->decimal('principal', 10,2);//amount loaned
-            $table->decimal('interest', 10, 2)->between(0.01,0.99);//profit to mfb
-            $table->decimal('total_savings', 10, 2)->default(0);
+            $table->decimal('interest', 10, 2);//profit to mfb
+            $table->decimal('total_savings', 10, 2)->default(0.00);
             $table->decimal('weekly_remittance', 10, 2);
-            $table->decimal('weekly_savings', 10, 2)->default(0);/**sum to equal total savings at the end of the loan duration*/
-            $table->decimal('interest_rate', 10, 2);
+            $table->decimal('weekly_savings', 10, 2)->default(0.00);/**sum to equal total savings at the end of the loan duration*/
+            $table->decimal('interest_rate', 10, 2)->between(0.01,0.99)->nullable();
 
             $table->timestamps();
         });

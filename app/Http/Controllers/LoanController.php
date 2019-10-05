@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Loan;
 use Illuminate\Http\Request;
+use Gate;
 
 class LoanController extends Controller
 {
@@ -25,6 +27,9 @@ class LoanController extends Controller
      */
     public function create()
     {
+        if(!Gate::allows('isAdmin')){
+            abort(403,"Sorry, You don't have permission to create a loan stage");
+        }
         return view('loans.create');
     }
 
@@ -36,6 +41,9 @@ class LoanController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Gate::allows('isAdmin')){
+            abort(403,"Sorry, You don't have permission to create a loan stage");
+        }
         $this->validate($request, [
             'name' => 'required|min:3',
             'description' => 'required|min:10',
@@ -81,6 +89,9 @@ class LoanController extends Controller
      */
     public function edit(Loan $loan)
     {
+        if(!Gate::allows('isAdmin')){
+            abort(403,"Sorry, You don't have permission to update a loan stage");
+        }
         return view('loans.edit', compact('loan'));
     }
 
@@ -93,6 +104,9 @@ class LoanController extends Controller
      */
     public function update(Request $request, Loan $loan)
     {
+        if(!Gate::allows('isAdmin')){
+            abort(403,"Sorry, You don't have permission to update a loan stage");
+        }
         $this->validate($request, [
             'name' => 'required|min:3',
             'description' => 'required|min:10',
@@ -127,6 +141,9 @@ class LoanController extends Controller
      */
     public function destroy(Loan $loan)
     {
+        if(!Gate::allows('isAdmin')){
+            abort(403,"Sorry, You don't have permission to delete a loan stage");
+        }
         $loan->delete();
         session()->flash('message', 'This loan type has been deleted successfully');
         return redirect(route('loans.index'));

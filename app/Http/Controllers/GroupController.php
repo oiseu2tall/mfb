@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Group;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Gate;
 
 class GroupController extends Controller
 {
@@ -14,6 +18,9 @@ class GroupController extends Controller
      */
     public function index()
     {
+        if(!Gate::allows('isAdmin') && !Gate::allows('isManager')){
+            abort(403,"Sorry, You don't have permission to view this page");
+        }
         $groups = Group::all();
         return view('groups.index', compact('groups'));
     }
@@ -41,10 +48,12 @@ class GroupController extends Controller
             'name' => 'required|min:3',
             'venue' => 'required|min:10'
         ]);
+        $user = Auth::user();
         Group::create([
             'name' => $request->name,
             'venue' => $request->venue,
             'meeting_day' => $request->meeting_day,
+            'user_id' => $user->id,
         ]);
         return redirect(route('groups.index'));
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Customer;
 use App\Group;
 use App\Repayment;
@@ -11,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
+use Gate;
 //use Illuminate\Support\Facades\DB;
 //use Illuminate\Pagination\Paginator;
 
@@ -68,7 +70,7 @@ class CustomerController extends Controller
             'phone' => 'required|min:6',
             'group_id' => 'required',
             //'image_name' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4048'
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
 
@@ -194,7 +196,7 @@ $this->validate($request, [
             'phone' => 'required|min:6',
             'group_id' => 'required',
             //'image_name' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4048'
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
         ]);
 

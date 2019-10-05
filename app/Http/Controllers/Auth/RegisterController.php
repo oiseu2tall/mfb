@@ -37,7 +37,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+       // $this->middleware('guest');
     }
 
     /**
@@ -52,6 +52,9 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'max:11'],
         ]);
     }
 
@@ -63,9 +66,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+       if(!Gate::allows('isAdmin')){
+            abort(403,"Sorry, You don't have permission to create user");
+        }
         return User::create([
             'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'middle_name' => $data['middle_name'],
+            'phone' => $data['phone'],
             'email' => $data['email'],
+            'role' => $data['role'],
+
             'password' => Hash::make($data['password']),
         ]);
     }

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Credit;
 use App\Customer;
 use App\Loan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Gate;
 
 class CreditController extends Controller
 {
