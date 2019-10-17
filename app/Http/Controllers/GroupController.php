@@ -22,7 +22,7 @@ class GroupController extends Controller
             abort(403,"Sorry, You don't have permission to view this page");
         }
         */
-        $groups = Group::all();
+        $groups = Group::all()->sortBy('name');
         return view('groups.index', compact('groups'));
     }
 
@@ -33,6 +33,7 @@ class GroupController extends Controller
      */
     public function create()
     {
+
         $users = User::all();
         return view('groups.create', compact('users'));
     }
@@ -59,6 +60,7 @@ class GroupController extends Controller
             'meeting_day' => $request->meeting_day,
             'user_id' => $request->user_id,
         ]);
+        session()->flash('message', 'This group has been created successfully');
         return redirect(route('groups.index'));
     }
 
@@ -93,16 +95,22 @@ class GroupController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Group $group)
-    {   
+    {   /**
+        if((!Gate::allows('isAdmin') && !Gate::allows('isManager')) || (!Gate::allows('isCashOfficer') && Auth::user()->id == $group->user_id)) {
+            abort(403,"Sorry, You don't have permission to view this page");
+        }
+        */
         $this->validate($request, [
             'name' => 'required|min:3',
             'venue' => 'required|min:10',
-            'meeting_day' => 'required'
+            'meeting_day' => 'required',
+            'user_id' => 'required'
         ]);
 
         $group->name = $request->name;
         $group->venue = $request->venue;
         $group->meeting_day = $request->meeting_day;
+        $group->user_id = $request->user_id;
         $group->save();
         session()->flash('message', 'This group has been updated successfully');
         //return redirect()->back();

@@ -28,7 +28,7 @@
 <h4>Weekly Savings: {{$loan->weekly_savings}}</h4>
 
 
-
+@can(isAdmin')
 <div class="floate">
 <a href="{{route('loans.edit', $loan->id)}}" class="btn btn-info btn-sm mb-1">edit </a>&nbsp;<form onsubmit="return confirm('Are you sure you want to delete this Loan Type?')" method="post" action="{{route('loans.destroy', $loan->id)}}">
           @csrf
@@ -36,7 +36,7 @@
           <button type="submit" class="btn btn-danger btn-sm mb-1">Delete</button> 
       </form>
   </div>
-           
+   @endcan        
         </div>
             <div class="bg"></div>
 

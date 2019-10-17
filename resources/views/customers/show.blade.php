@@ -1,4 +1,4 @@
-use Carbon\Carbon;
+<!--use Carbon\Carbon;-->
 @extends('layouts.app')
 @section('content')
 <div class="row">
@@ -18,10 +18,13 @@ use Carbon\Carbon;
         <div class="left">
           <h2><span>{{$customer->surname}} </span>{{$customer->middle_name}} {{$customer->first_name}}</h2>
           <img src="{{ asset('images/'.$customer->image_name) }}" alt="Profile Picture" width="150" class="floated" />
+<h4>
+  CASH OFFICER: {{$customer->group->user->name}} {{$customer->group->user->middle_name}} {{$customer->group->user->first_name}}
+</h4>          
 <h4>Group: <a href="{{route('groups.show', $customer->group_id)}}">{{$customer->group->name}}</a></h4>
 <h6>Card Number: {{$customer->card_number}}</h6>
 <h6>Alias: {{$customer->aka}}</h6>
-<h6>Date of birth: {{$customer->dateOfBirth}}</h6>
+<h6>Date of birth: {{Carbon\Carbon::parse($customer->dateOfBirth)->toFormattedDateString()}}</h6>
 <h6>Address: {{$customer->address}}</h6>
 <h6>Email: {{$customer->email}}</h6>
 <h6>Phone: {{$customer->phone}}</h6>
@@ -30,7 +33,7 @@ use Carbon\Carbon;
 <h6>Guarantor Phone: {{$customer->guarantor_phone}}</h6>
 
 
-
+@if(Auth::user()->can('isAdmin') || Auth::user()->can('isManager') || ($customer->group->user_id == Auth::user()->id))
 <div class="floate">
 <a href="{{route('customers.edit', $customer->id)}}" class="btn btn-info btn-sm mb-1">edit </a>&nbsp;<form onsubmit="return confirm('Are you sure you want to delete this customer?')" method="post" action="{{route('customers.destroy', $customer->id)}}">
           @csrf
@@ -38,7 +41,7 @@ use Carbon\Carbon;
           <button type="submit" class="btn btn-danger btn-sm mb-1">Delete</button> 
       </form>
   </div>
-           
+    @endif       
         </div>
             <div class="bg"></div>
 
@@ -65,19 +68,23 @@ use Carbon\Carbon;
 @if($repayment->loan_id == $credit->loan_id)
 <tbody>
     <tr>
-    <td><a href="{{route('repayments.show', $repayment->id)}}">{{$repayment->payment_date}} </a></td>
+    <td><a href="{{route('repayments.show', $repayment->id)}}">{{Carbon\Carbon::parse($repayment->payment_date)->toFormattedDateString()}} </a></td>
     <td>{{$repayment->installment}}</td> 
     <td>{{$repayment->savings}}</td> 
     <td>{{$repayment->extra_savings}}</td> 
     <td>{{$repayment->loan->name}}</td>
     <td>{{$repayment->balance}}</td>
+
     <td style="display:inline-flex;">
+
+@if(Auth::user()->can('isAdmin') || Auth::user()->can('isManager') || ($customer->group->user_id == Auth::user()->id))
     <a href="{{route('repayments.edit', $repayment->id)}}" class="btn btn-info btn-sm mb-2">Edit</a> &nbsp; &nbsp;
         <form onsubmit="return confirm('Are you sure you want to delete this payment?')" method="post" action="{{route('repayments.destroy', $repayment->id)}}">
           @csrf
           @method('delete')
           <button type="submit" class="btn btn-danger btn-sm mb-2">Delete</button>
         </form>
+@endif
     </td>
     
   </tr>
@@ -89,7 +96,7 @@ use Carbon\Carbon;
 
 
 
-
+@if(Auth::user()->can('isAdmin') || Auth::user()->can('isManager') || ($customer->group->user_id == Auth::user()->id))
 
 <form action="{{route('repayments.store')}}" method="post" class="repay">
   @csrf
@@ -123,7 +130,7 @@ use Carbon\Carbon;
             </fieldset>
             <div><button style="background-color: #abda0f; color: #fff;">Submit &raquo;</button></div>
 </form>
-
+@endif
 <div class="bg"></div>
 
 @endforeach

@@ -18,7 +18,10 @@ class CreditController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        if(!Gate::allows('isAdmin')){
+            abort(403,"Sorry, You don't have permission to view this page");
+        }
         $credits = credit::all();
         return view('credits.index', compact('credits'));
     }
@@ -30,7 +33,7 @@ class CreditController extends Controller
      */
     public function create()
     {
-        $loans = Loan::all('id', 'name');
+        $loans = Loan::all();
         //$customers = Customer::all('id', 'first_name', 'surname');
        //return view('credits.create', compact('loans'), compact('customers'));
         return view('credits.create', compact('loans'));

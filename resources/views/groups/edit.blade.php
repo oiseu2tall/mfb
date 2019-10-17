@@ -60,12 +60,14 @@
           @if($user->id==$group->user_id)
       <option value="{{ $user->id }}" selected>{{$user->name}} {{$user->middle_name}} {{$user->first_name}}</option>
           @else
-          <option value="{{ $user->id }}">{{$user->name}} {{$user->middle_name}} {{$user->first_name}}</option>
+          <option value="{{$user->id}}">{{$user->name}} {{$user->middle_name}} {{$user->first_name}}</option>
           @endif
       @endforeach
+      @elseif(Auth::user()->can('isCashOfficer') && Auth::user()->id == $group->user_id)
+      <input type="hidden" name="user_id" id="user_id" value='{{$group->user_id}}'>
       @endif
-                 </select> 
-
+                 </select>
+                 
                  </p>
 
   </fieldset>

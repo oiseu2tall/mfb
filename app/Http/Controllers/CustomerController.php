@@ -168,7 +168,7 @@ private function imagecreatefromjpegexif($filename)
      */
     public function edit(Customer $customer)
     {
-        $groups = Group::all('id', 'name');
+        $groups = Group::all('id', 'name', 'user_id');
         return view('customers.edit', compact('customer'),compact('groups'));
     }
 
@@ -182,6 +182,11 @@ private function imagecreatefromjpegexif($filename)
     public function update(Request $request, Customer $customer)
     {
         
+        if((!Gate::allows('isAdmin') && !Gate::allows('isManager')) || Auth::users()->id == $this->$customer->group->user_id){
+            abort(403,"Sorry, You don't have permission to view this page");
+        }
+
+
 $this->validate($request, [
             'first_name' => 'required|min:3',
             'card_number' => 'required',
@@ -253,30 +258,6 @@ $customer->image_name = $filename;
         session()->flash('message', 'This customer has been deleted successfully');
         return redirect(route('customers.index'));
     }
-    
-
-/**
-public function search()
-    {
-       
-        $q = Request::get ( 'q' );
-    $result = DB::table('customers', 'groups')->where('surname','LIKE','%'.$q.'%')->orWhere('middle_name','LIKE','%'.$q.'%')->orWhere('first_name','LIKE','%'.$q.'%')->get();
-    if(count($result) > 0)
-        return view('search')->withDetails($result)->withQuery ( $q );
-    else return view ('search')->withMessage('No Details found. Try to search again !');
-  
-        
-
-$q = $request->get('q');
-$result = DB::table('customers', 'groups')->where('surname','LIKE','%'.$q.'%')
-->orWhere('middle_name','LIKE','%'.$q.'%')->orWhere('first_name','LIKE','%'.$q.'%')
-->orderBy('surname');
-    if(count($result) > 0)
-        return view('search')->withDetails($result)->withQuery($q);
-    else return view ('search')->withMessage('No Details found. Try to search again !');
-
-    }
-**/
 
 
 

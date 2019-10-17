@@ -43,6 +43,7 @@
        <td>{{$loan->interest}}</td>
        <td>{{$loan->duration}}</td>
        <td>{{$loan->weekly_remittance}}</td>
+       @can('isAdmin')
         <td style="display: inline-flex;">
         <a href="{{route('loans.edit', $loan->id)}}" class="btn btn-info btn-sm mb-1">Edit</a>&nbsp;
     <form onsubmit="return confirm('Are you sure you want to delete this loan type?')" method="post" action="{{route('loans.destroy', $loan->id)}}">
@@ -51,6 +52,7 @@
           <button type="submit" class="btn btn-danger btn-sm mb-1">Delete</button>
         </form>
       </td>
+      @endcan
 </tr>
     
   @endforeach

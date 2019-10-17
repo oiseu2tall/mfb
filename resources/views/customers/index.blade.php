@@ -60,6 +60,12 @@
        <td>{{$customer->phone}}</td>
        <td>{{$customer->guarantor_name}}</td>
        <td><a href="{{route('groups.show', $customer->group_id)}}">{{$customer->Group->name}}</a></td>
+
+       @if(
+        (Auth::user()->can('isAdmin'))
+            ||($customer->group->user_id == Auth::user()->id)||
+                (Auth::user()->can('isManager'))
+                )
         <td style="display: inline-flex;">
         <a href="{{route('customers.edit', $customer->id)}}" class="btn btn-info btn-sm mb-1">Edit</a>&nbsp;
     <form onsubmit="return confirm('Are you sure you want to delete this customer?')" method="post" action="{{route('customers.destroy', $customer->id)}}">
@@ -68,6 +74,7 @@
           <button type="submit" class="btn btn-danger btn-sm mb-1">Delete</button>
         </form>
       </td>
+      @endif
 </tr>
     
   @endforeach

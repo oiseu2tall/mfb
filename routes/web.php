@@ -14,16 +14,22 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 //Auth::routes(['register' => false]);
-Route::resource('customers','CustomerController')->middleware('auth');;
-Route::resource('groups','GroupController')->middleware('auth');;
-Route::resource('loans','LoanController')->middleware('auth');;
-Route::resource('credits','CreditController')->middleware('auth');;
-Route::resource('repayments','RepaymentController')->middleware('auth');;
+
+Route::resource('customers','CustomerController')->middleware('auth');
+Route::resource('groups','GroupController')->middleware('auth');
+Route::resource('loans','LoanController')->middleware('auth');
+Route::resource('credits','CreditController')->middleware('auth');
+Route::resource('repayments','RepaymentController')->middleware('auth');
+Route::resource('users','UserController')->middleware('auth');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+//Route::put('/register/update/{id}','RegisterController@update');
+//Route::post('/register/edit/{id}','RegisterController@edit');
 
 Route::any('/search',function(){
 

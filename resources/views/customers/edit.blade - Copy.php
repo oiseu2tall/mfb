@@ -60,7 +60,8 @@
                 <p>
                     <label>Date of birth *
                     </label>
-<input type="date" name="dateOfBirth" id="dateOfBirth" value='{{$customer->dateOfBirth}}'/>
+<input type="date" name="dateOfBirth" id="dateOfBirth" value='{{$customer->dateOfBirth}}'
+max="2001-12-31"/>
                 </p>
                 <p>
                     <label>Address *
@@ -79,39 +80,17 @@
                 </p>
 
                 <p>
-                    @if((Auth::user()->can('isCashOfficer'))
-                        &&($customer->group->user_id == Auth::user()->id))
-
                     <label>Group *
                     </label>
                     <select name="group_id" id="group_id">
-                        
                         @foreach($groups->sortBy('name') as $group)
-            
-            @if(($group->id) === ($customer->group_id))
-        <option value="{{$group->id}}" selected>{{$group->name}}</option>
-        @elseif(Auth::user()->id == $group->user_id)
-        <option value="{{$group->id}}">{{$group->name}}</option>
-        
-        @endif
-        @endforeach
-       </select> 
-                    @endif
-
-
-              @if(Auth::user()->can('isAdmin') || Auth::user()->can('isManager'))
-              <label>Group *
-                    </label>
-                    <select name="group_id" id="group_id">
-                        @foreach($groups->sortBy('name') as $group)
-          @if($group->id==$customer->group_id)
+        @if($group->id==$customer->group_id)
         <option value='{{ $group->id }}' selected>{{$group->name}}</option>
         @else
         <option value='{{ $group->id }}'>{{$group->name}}</option>
         @endif
-                       @endforeach
-       </select> 
-                    @endif
+                          @endforeach
+                    </select>
                 </p>
                 
    </fieldset>

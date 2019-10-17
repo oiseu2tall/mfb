@@ -84,7 +84,7 @@
                         &&($group->user_id == Auth::user()->id))
                         
                         
-        <option value="{{ $group->id }}" >{{$group->name}}</option>     
+        <option value="{{ $group->id }}">{{$group->name}}</option>     
 
       @elseif(Auth::user()->can('isAdmin') || Auth::user()->can('isManager'))
     <option value="{{ $group->id }}" >{{$group->name}}</option>

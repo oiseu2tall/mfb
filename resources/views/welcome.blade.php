@@ -82,23 +82,24 @@
 
             <div class="content">
 
+<!--
                 <a href="{{route('groups.index')}}">Groups</a> 
                 <a href="{{route('customers.index')}}">Customers</a>
 
                 <a href="{{route('loans.index')}}">Loan Types</a>
 
                 <a href="{{route('credits.index')}}">Loan Requests</a>
-
+-->
                 <div class="title m-b-md">
                    Solution Micro Centre
                 </div>
-        
+        <!--
                 <a href="{{route('customers.create')}}">Create Customer</a>
 
                 <a href="{{route('loans.create')}}">Create Loan Type</a>
 
                 <a href="{{route('groups.create')}}">Create Group</a>
-            
+            -->
 
 
 

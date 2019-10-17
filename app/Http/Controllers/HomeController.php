@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
+use App\User;
+use App\Group;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Gate;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -24,7 +28,10 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('home');
+    {   
+        $users = User::all()->where('id','!=', Auth::user()->id);
+        $mygroups = Group::all()->where('user_id', Auth::user()->id);
+        return view('home', compact('mygroups'), compact('users'));
+
     }
 }
