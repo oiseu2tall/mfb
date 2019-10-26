@@ -22,7 +22,7 @@
                 <p>
                     <label>Start Date *
                     </label>
-                    <input type="date" name="start_date" id="start_date"/>
+                    <input type="date" name="start_date" id="start_date" value="{{ old('start_date') }}"/>
                     <!--
                     <label>End Date *
                     </label>
@@ -34,7 +34,7 @@
                         <option selected>Select Loan Type
                         </option>
                         @foreach($loans as $loan)
-        <option value="{{ $loan->id }}" >{{$loan->name}}</option>
+        <option value="{{ $loan->id }}">{{$loan->name}}</option>
                         @endforeach
                     </select>
                  </p>

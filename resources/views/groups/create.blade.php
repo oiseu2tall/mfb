@@ -22,13 +22,13 @@
                 <p>
                     <label>Name *
                     </label>
-                    <input type="text" name="name" id="name" class="long"/>
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" class="long"/>
 
                     <label>Meeting Days *
                     </label>
                     <select name="meeting_day" id="meeting_day" class="select"/>
                     <option selected></option>
-                      <option value="Monday">Monday</option>
+<option value="Monday">Monday</option>
 <option value="Tuesday">Tuesday</option>
 <option value="Wednesday">Wednesday</option>
 <option value="Thursday">Thursday</option>
@@ -46,7 +46,7 @@
 
                   <label>Venue *
                     </label>
-                    <textarea name="venue" id="venue"></textarea>
+                    <textarea name="venue" id="venue" value="{{ old('venue') }}"></textarea>
 
 @if(Auth::user()->can('isAdmin') || Auth::user()->can('isManager'))
                   <label>Cash Officer *

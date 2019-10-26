@@ -26,23 +26,23 @@
                   <p>  
                     <label>Card Number *
                     </label>
-                    <input type="text" name="card_number" id="card_number"/>
+                    <input type="text" name="card_number" id="card_number" value="{{ old('card_number') }}"/>
                  </p>
                   <p>
                     <label>Surname *
                     </label>
-                    <input type="text" name="surname" id="surname"/>
+                    <input type="text" name="surname" id="surname" value="{{ old('surname') }}"/>
                     <label>First Name*
                     </label>
-                    <input type="text" name="first_name" id="first_name"/>
+                    <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}"/>
                 </p>
                 <p>
                     <label class="optional">Middle Name
                     </label>
-                    <input type="text" name="middle_name" id="middle_name"/>
+                    <input type="text" name="middle_name" id="middle_name" value="{{ old('middle_name') }}"/>
                     <label class="optional">Alias
                     </label>
-                    <input type="text" name="aka" id="aka"/>
+                    <input type="text" name="aka" id="aka" value="{{ old('aka') }}"/>
                 </p>
                 
             </fieldset>
@@ -53,22 +53,22 @@
                 <p>
                     <label>Date of birth *
                     </label>
-                    <input type="date" name="dateOfBirth" id="dateOfBirth" class="date"/>
+                    <input type="date" name="dateOfBirth" id="dateOfBirth" class="date" value="{{ old('dateOfBirth') }}"/>
                 </p>
                 <p>
                     <label>Address *
                     </label>
-                    <textarea name="address" id="address"></textarea>
+                    <textarea name="address" id="address" value="{{ old('address') }}"></textarea>
                 </p>
                 <p>
                     <label>Phone *
                     </label>
-                    <input type="text" name="phone" id="phone" maxlength="11"/>
+                    <input type="text" name="phone" id="phone" value="{{ old('phone') }}" maxlength="11"/>
                 </p>
                 <p>
                     <label class="optional">Email
                     </label>
-                    <input type="text" name="email" id="email" class="long"/>
+                    <input type="text" name="email" id="email" class="long" value="{{ old('email') }}"/>
                 </p>
                 <input name="image_name" type="hidden" id="image_name" />
                 <p>
@@ -83,11 +83,11 @@
                         @if((Auth::user()->can('isCashOfficer'))
                         &&($group->user_id == Auth::user()->id))
                         
-                        
+                     
         <option value="{{ $group->id }}">{{$group->name}}</option>     
 
       @elseif(Auth::user()->can('isAdmin') || Auth::user()->can('isManager'))
-    <option value="{{ $group->id }}" >{{$group->name}}</option>
+    <option value="{{ $group->id }}">{{$group->name}}</option>
                       @endif
 <!--
       @if(Gate::check('isAdmin') || Gate::check('isManager'))
@@ -106,17 +106,17 @@
                 <p>
                     <label>Guarantor Name*
                     </label>
-                    <input type="text" name="guarantor_name" id="guarantor_name"/>
+                    <input type="text" name="guarantor_name" id="guarantor_name" value="{{ old('guarantor_name') }}"/>
                 </p>
                 <p>
                     <label>Guarantor Address*
                     </label>
-                    <textarea name="guarantor_address" id="guarantor_address"></textarea>
+                    <textarea name="guarantor_address" id="guarantor_address" value="{{ old('guarantor_address') }}"></textarea>
                 </p>
                 <p>
                     <label>Guarantor Phone*
                     </label>
-        <input type="text" name="guarantor_phone" id="guarantor_phone" maxlength="11"/>
+        <input type="text" name="guarantor_phone" id="guarantor_phone" maxlength="11" value="{{ old('guarantor_phone') }}"/>
                 </p>
     </fieldset>
     
@@ -130,55 +130,3 @@
 
 
 
-
-
-
-
-
-<!--
-  <div class="col-md-6">
-    <label for="image">Image</label>
-    <input type="file" name="image" class="form-control">
-  </div>
-  <div class="form-group">
-    <label for="first_name">first Name</label>
-    <input type="text" name="first_name" id="first_name">
-  </div>
-  <div class="form-group">
-    <label for="surname">surname</label>
-    <input type="text" name="surname" id="surname"/>
-  </div>
-  <div class="form-group">
-    <label for="address">Address</label>
-    <input name="address" id="address"/>
-  </div>
-<input name="image_name" type="hidden" id="image_name" />
-  <div class="form-group">
-    <label for="phone">Phone</label>
-    <input name="phone" id="phone"/>
-  </div>
-
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input name="email" id="email"/>
-  </div>
-
-  <div class="form-group">
-    <label for="dateOfBirth">Date of birth</label>
-    <input name="dateOfBirth" id="dateOfBirth"/>
-  </div>
-
-<div class="form-group">
-    <label for="group_id">Group</label>
-   <select name="group_id" id="group_id">
-    <option value="" selected>Select Group</option>
-@foreach($groups as $group)
-        <option value="{{ $group->id }}" >{{$group->name}}</option>
-@endforeach
-    </select>
-  </div>
-
-  <div>
-    <button type="submit">Add a Customer</button>
-  </div>
--->

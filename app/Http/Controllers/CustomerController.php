@@ -106,7 +106,7 @@ imagejpeg($image, public_path('images/'.$filename), 60);
         $customer->image_name = $filename;
     */
 
-   
+   $id = $request->get('id');
 
    $customer = new Customer([
             'first_name' => $request->get('first_name'),
@@ -128,11 +128,12 @@ imagejpeg($image, public_path('images/'.$filename), 60);
 
         $customer->save();
         session()->flash('message', 'The Customer has been created successfully');
-        return redirect(route('customers.index'));
+        return redirect(route('customers.show', $this->$request->id));
             }
             else{
 session()->flash('message', 'A record already exists with this customer names');
-                return redirect(route('customers.index'));
+                //return redirect(route('customers.index'));
+return redirect()->back()->withInput();
             }
     }
 
