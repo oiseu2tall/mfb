@@ -66,13 +66,20 @@
 
   <div class="right_resize">
         <div class="right block">
+          <h4><a href="{{ route('home') }}">HOME</a></h4>
           <h2><span>Quick</span> Links</h2>
           <ul>
             <li><a href="{{route('groups.create')}}">Create New Group</a></li>
             <li><a href="{{route('groups.index')}}">Groups</a></li>
             <li><a href="{{route('customers.index')}}">Customers</a></li>
             <li><a href="{{route('loans.index')}}">Loan Types</a></li>
+            @cannot('isCashOfficer')
             <li><a href="{{route('credits.index')}}">All Disbursed Loans</a></li>
+            @endcannot
+            @can('isAdmin')
+            <li><a href="{{route('loans.create')}}">Create New Loan Stage</a></li>
+            <li><a href="{{ route('register') }}">Create New User</a></li>
+            @endcan
           </ul>
         </div>
 

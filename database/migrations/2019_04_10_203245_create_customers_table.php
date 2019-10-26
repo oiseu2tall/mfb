@@ -18,7 +18,7 @@ class CreateCustomersTable extends Migration
             $table->Integer('card_number')->length(10);
             $table->string('image_name', 100)->unique();
             $table->string('first_name', 100);
-            $table->string('middle_name', 100);
+            $table->string('middle_name', 100)->nullable();
             $table->string('surname', 100);
             $table->string('aka', 100)->nullable();
             $table->text('address');

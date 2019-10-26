@@ -41,7 +41,6 @@
           <td>CARD NO.</td>
           <td>NAME</td>
           <td>ALIAS</td>
-          <td>ADDRESS</td>
           <td>PHONE</td>
           <td>GUARANTOR</td>
           <td>GROUP</td>
@@ -56,7 +55,6 @@
           {{$customer->surname}}</span> {{$customer->first_name}}</a></td>
       
        <td>{{$customer->aka}}</td>
-       <td>{{$customer->address}}</td>
        <td>{{$customer->phone}}</td>
        <td>{{$customer->guarantor_name}}</td>
        <td><a href="{{route('groups.show', $customer->group_id)}}">{{$customer->Group->name}}</a></td>
@@ -87,13 +85,21 @@
 
 <div class="right_resize">
         <div class="right block">
+          <h4><a href="{{ route('home') }}">HOME</a></h4>
           <h2><span style="color: #abda0f;">Quick</span> Links</h2>
           <ul>
             <li><a href="{{route('customers.create')}}">Create New Customer</a></li>
             <li><a href="{{route('groups.index')}}">Groups</a></li>
             <li><a href="{{route('customers.index')}}">Customers</a></li>
             <li><a href="{{route('loans.index')}}">Loan Types</a></li>
+            @cannot('isCashOfficer')
             <li><a href="{{route('credits.index')}}">All Disbursed Loans</a></li>
+            @endcannot
+            @can('isAdmin')
+            <li><a href="{{route('loans.create')}}">Create New Loan Stage</a></li>
+            <li><a href="{{ route('register') }}">Create New User</a></li>
+            @endcan
+            
           </ul>
         </div>
             <div class="right block">

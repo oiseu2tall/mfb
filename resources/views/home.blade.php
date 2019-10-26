@@ -112,8 +112,8 @@
       </form>
 </div>
 
-    <br />
-    <span style="color: green">Groups</span>
+    <br /><br/><br/><br/>
+    <caption><span style="color: green">GROUPS</span></caption>
     <ul style="list-style:none;">
         @foreach($user->groups as $group)
         <li><a href="{{route('groups.show', $group->id)}}">{{$group->name}}</a></li>

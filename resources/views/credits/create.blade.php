@@ -39,9 +39,12 @@
                     </select>
                  </p>
                  <?php $customer_id = session('customerid'); ?>
- <input name="customer_id" type="hidden" id="customer_id" value="{{$customer_id}}" /> <p> {{$customer_id}}</p>
+ <input name="customer_id" type="hidden" id="customer_id" value="{{$customer_id}}" /> 
+ <!--
+ <p> {{$customer_id}}</p>
 
 <p>after here {{ session('customerid') }}</p>
+-->
 
   </fieldset>
 

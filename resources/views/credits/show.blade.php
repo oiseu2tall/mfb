@@ -15,13 +15,13 @@
     <div class="body">
 <div class="left_resize block">
         <div class="left">
-          <h2><a href="{{route('customers.show', $credit->customer->id)}}">{{$credit->customer->first_name}} {{$credit->customer->surname}}</a></h2>
+          <h2>CUSTOMER: <a href="{{route('customers.show', $credit->customer->id)}}">{{$credit->customer->first_name}} {{$credit->customer->surname}}</a></h2>
           
           
 <h4>Start Date: <span>{{$credit->start_date}}</span></h4>
 <h4>End Date: {{$credit->end_date}}</h4>
 <h4><span>{{$credit->loan->name}}</span> Loan Type</h4>
-
+<h4>{{$credit->customer->group->name}} Group</h4>
 
 
 <div class="floate">
@@ -46,6 +46,7 @@
 
              <div class="right_resize">
         <div class="right block">
+          <a href="{{ route('home') }}">HOME</a></h4>
           <h2><span>Quick</span> Links</h2>
           <ul>
             <li><a href="{{route('loans.create')}}">Create Loan Type
@@ -53,7 +54,13 @@
             <li><a href="{{route('groups.index')}}">Groups</a></li>
             <li><a href="{{route('customers.index')}}">Customers</a></li>
             <li><a href="{{route('loans.index')}}">Loan Types</a></li>
+            @can('isAdmin')
+            <li><a href="{{route('loans.create')}}">Create New Loan Stage</a></li>
+            <li><a href="{{ route('register') }}">Create New User</a></li>
+            @endcan
+            @cannot('isCashOfficer')
             <li><a href="{{route('credits.index')}}">All Disbursed Loans</a></li>
+            @endcannot
           </ul>
         </div>
 

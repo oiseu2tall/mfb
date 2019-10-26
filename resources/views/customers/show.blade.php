@@ -17,20 +17,21 @@
 <div class="left_resize block">
         <div class="left">
           <h2><span>{{$customer->surname}} </span>{{$customer->middle_name}} {{$customer->first_name}}</h2>
-          <img src="{{ asset('images/'.$customer->image_name) }}" alt="Profile Picture" width="150" class="floated" />
+          <img src="{{ asset('images/'.$customer->image_name) }}" alt="Profile Picture" width="200" class="floated" />
+    <div style="float:right; width: 400px; display: block; border: 1px solid #eee; padding: 20px; font-size: 14px; ">
 <h4>
   CASH OFFICER: {{$customer->group->user->name}} {{$customer->group->user->middle_name}} {{$customer->group->user->first_name}}
 </h4>          
-<h4>Group: <a href="{{route('groups.show', $customer->group_id)}}">{{$customer->group->name}}</a></h4>
-<h6>Card Number: {{$customer->card_number}}</h6>
-<h6>Alias: {{$customer->aka}}</h6>
-<h6>Date of birth: {{Carbon\Carbon::parse($customer->dateOfBirth)->toFormattedDateString()}}</h6>
-<h6>Address: {{$customer->address}}</h6>
-<h6>Email: {{$customer->email}}</h6>
-<h6>Phone: {{$customer->phone}}</h6>
-<h6>Guarantor name: {{$customer->guarantor_name}}</h6>
-<h6>Guarantor Address: {{$customer->guarantor_address}}</h6>
-<h6>Guarantor Phone: {{$customer->guarantor_phone}}</h6>
+<h4>GROUP: <a href="{{route('groups.show', $customer->group_id)}}">{{$customer->group->name}}</a></h4>
+<h6>CARD NUMBER:</h6> {{$customer->card_number}}<br/>
+<h6>ALIAS:</h6> {{$customer->aka}}<br/>
+<h6>D.O.B:</h6> {{Carbon\Carbon::parse($customer->dateOfBirth)->toFormattedDateString()}}<br/>
+<h6>ADDRESS:</h6> <span style="text-align: center; display: inline-block;">{{$customer->address}}</span><br/>
+<h6>EMAIL:</h6> {{$customer->email}}<br/>
+<h6>PHONE:</h6> {{$customer->phone}}<br/>
+<h6>GUARANTOR:</h6> {{$customer->guarantor_name}}<br/>
+<h6>GUARANTOR ADDRESS:</h6><span style="text-align: center; display: inline-block;"> {{$customer->guarantor_address}}</span><br/><br/>
+<h6>GUARANTOR PHONE: </h6>{{$customer->guarantor_phone}}<br/><br/>
 
 
 @if(Auth::user()->can('isAdmin') || Auth::user()->can('isManager') || ($customer->group->user_id == Auth::user()->id))
@@ -41,7 +42,8 @@
           <button type="submit" class="btn btn-danger btn-sm mb-1">Delete</button> 
       </form>
   </div>
-    @endif       
+    @endif 
+    </div><!--dummy-->      
         </div>
             <div class="bg"></div>
 
@@ -61,19 +63,25 @@
                     <table class="table table-striped" style="display: inline-table;font-size: 12px;">
           <thead>
             <tr>
-              <td>DATE</td> <td>INSTALL</td> <td>SAVINGS</td> <td>EXTRA SAVS</td> <td>LOAN</td><td>BALANCE</td><td>ACTIONS</td>
+              <td>DATE</td> <td>REPAYMENT</td> <td>SAVINGS</td> <td>EXTRA SAVS</td><td>OUTSTANDING</td><td>ACTIONS</td>
             </tr>   
           </thead>
-@foreach($customer->repayments as $repayment)
+          
+          @php 
+          $balance = $credit->loan->principal;
+          $x = $credit->loan->principal;
+          @endphp
+<tbody>          
+@foreach($customer->repayments->sortBy('payment_date') as $repayment)
 @if($repayment->loan_id == $credit->loan_id)
-<tbody>
+ @php $balance = $balance - $repayment->installment @endphp
+ 
     <tr>
     <td><a href="{{route('repayments.show', $repayment->id)}}">{{Carbon\Carbon::parse($repayment->payment_date)->toFormattedDateString()}} </a></td>
     <td>{{$repayment->installment}}</td> 
     <td>{{$repayment->savings}}</td> 
     <td>{{$repayment->extra_savings}}</td> 
-    <td>{{$repayment->loan->name}}</td>
-    <td>{{$repayment->balance}}</td>
+    <td>{{$balance}}</td>
 
     <td style="display:inline-flex;">
 
@@ -88,9 +96,11 @@
     </td>
     
   </tr>
-</tbody>
+
   @endif
+
 @endforeach
+</tbody>
 </table>
 
 
@@ -147,13 +157,23 @@
 
              <div class="right_resize">
         <div class="right block">
+          <h4><a href="{{ route('home') }}">My Dashboard</a></h4>
           <h2><span>Quick</span> Links</h2>
           <ul>
-            <li><a href="{{route('credits.create')}}" onclick="{{session(['customerid' => $customer->id])}}">Give Loan to {{$customer->surname}} {{$customer->middle_name}} {{$customer->first_name}} {{session('customerid')}}</a></li>
+
+            <li><a href="{{route('credits.create')}}" onclick="{{session(['customerid' => $customer->id])}}">Give Loan to {{$customer->surname}} {{$customer->middle_name}} {{$customer->first_name}} <!--{{session('customerid')}}--></a></li>
             <li><a href="{{route('customers.create')}}">Create New Customer</a></li>
             <li><a href="{{route('groups.index')}}">Groups</a></li>
             <li><a href="{{route('customers.index')}}">Customers</a></li>
             <li><a href="{{route('loans.index')}}">All Loans Types</a></li>
+            
+            @can('isAdmin')
+            <li><a href="{{route('loans.create')}}">Create New Loan Stage</a></li>
+            <li><a href="{{ route('register') }}">Create New User</a></li>
+            @endcan
+            @cannot('isCashOfficer')
+            <li><a href="{{route('credits.index')}}">All Disbursed Loans</a></li>
+            @endcannot
             
           </ul>
         </div>

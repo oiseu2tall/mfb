@@ -55,8 +55,11 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+ @auth                   <ul class="navbar-nav mr-auto">
+<li class="nav-item">
+    <a href="{{ route('home') }}">DASHBOARD</a>
+</li>
+@endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->

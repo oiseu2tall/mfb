@@ -11,6 +11,7 @@ use App\Credit;
 use App\Loan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use Gate;
@@ -67,10 +68,18 @@ class CustomerController extends Controller
             'dateOfBirth' => 'required',
             'phone' => 'required|min:6',
             'group_id' => 'required',
+           // 'email' => 'string|email|max:255',
             //'image_name' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
+
+$duplicate = Customer::where([['surname', '=', $request->get('surname')],
+    ['middle_name', '=', $request->get('middle_name')],
+    ['first_name', '=', $request->get('first_name')]]
+
+)->first();
+if (is_null($duplicate)) {
 
 //$filename = time().'.'.request()->image->getClientOriginalExtension();
 $filename = time().'.jpg';
@@ -97,6 +106,8 @@ imagejpeg($image, public_path('images/'.$filename), 60);
         $customer->image_name = $filename;
     */
 
+   
+
    $customer = new Customer([
             'first_name' => $request->get('first_name'),
             'middle_name' => $request->get('middle_name'),
@@ -118,6 +129,11 @@ imagejpeg($image, public_path('images/'.$filename), 60);
         $customer->save();
         session()->flash('message', 'The Customer has been created successfully');
         return redirect(route('customers.index'));
+            }
+            else{
+session()->flash('message', 'A record already exists with this customer names');
+                return redirect(route('customers.index'));
+            }
     }
 
 
@@ -182,7 +198,7 @@ private function imagecreatefromjpegexif($filename)
     public function update(Request $request, Customer $customer)
     {
         
-        if((!Gate::allows('isAdmin') && !Gate::allows('isManager')) || Auth::users()->id == $this->$customer->group->user_id){
+        if((!Gate::allows('isAdmin') && !Gate::allows('isManager')) || Auth::user()->id == $customer->group->user_id){
             abort(403,"Sorry, You don't have permission to view this page");
         }
 

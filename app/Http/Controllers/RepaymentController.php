@@ -103,18 +103,18 @@ class RepaymentController extends Controller
         $this->validate($request, [
             'payment_date' => 'required',
             'installment' => 'required',
-            'customer_id' => 'required|numeric',
-            'loan_id' => 'required',
-            'credit_id' => 'required'
+            //'customer_id' => 'required|numeric',
+            //'loan_id' => 'required',
+            //'credit_id' => 'required'
            
                  ]);
         $repayment->payment_date = $request->payment_date;
         $repayment->installment = $request->installment;
         $repayment->savings = $request->savings;
         $repayment->extra_savings = $request->extra_savings;
-        $repayment->customer_id = $request->customer_id;
-        $repayment->loan_id = $request->loan_id;
-        $repayment->credit_id = $request->credit_id;
+        //$repayment->customer_id = $request->customer_id;
+        //$repayment->loan_id = $request->loan_id;
+       // $repayment->credit_id = $request->credit_id;
 
         
         $repayment->save();
