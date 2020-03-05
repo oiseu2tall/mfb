@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="row">
-  <div class="col-sm-8 offset-sm-2">
+
 @if($errors->all())
   <div class="alert alert-danger">
     @foreach($errors->all() as $error)
@@ -10,14 +9,17 @@
   </div>
 @endif
 
-<div class="body_bg">
-    <div class="body">
 
-<div class="row">
-<div class="col-sm-8">
+<div class="container-fluid">
+
+
+  <!--center-->
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-xs-12">
 
   @if(isset($details))
-        <p>You searched for <span style="color: #abda0f;">{{ $query }}</span> :</p>
+        <p>You searched for <span style="color: #abda0f; font-size: 22px;">{{ $query }}</span> :</p>
     <h2>SEARCH RESULTS</h2>
     <table class="table table-striped">
         <thead>
@@ -27,6 +29,7 @@
                 <th>FIRST NAME</th>
                 <th>ALIAS</th>
                 <th>GROUP</th>
+                <th>ACTIONS</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +41,23 @@
                 <td>{{$customer->aka}}</td>
                 <td><a href="{{route('groups.show', $customer->groupid)}}">{{$customer->name}}
                 </a></td>
+
+ @if(
+        (Auth::user()->can('isAdmin'))
+            ||($customer->group->user_id == Auth::user()->id)||
+                (Auth::user()->can('isManager'))
+                )
+        <td style="display: inline-flex;">
+        <a href="{{route('customers.edit', $customer->id)}}" class="btn btn-info btn-sm mb-1">Edit</a>&nbsp;
+    <form onsubmit="return confirm('Are you sure you want to delete this customer?')" method="post" action="{{route('customers.destroy', $customer->id)}}">
+          @csrf
+          @method('delete')
+          <button type="submit" class="btn btn-danger btn-sm mb-1">Delete</button>
+        </form>
+      </td>
+      @endif
+
+
             </tr>
             @endforeach
         </tbody>
@@ -46,53 +66,21 @@
     <h2>No result found for your search!</h2>
     @endif
 
-
-  </div>
-
-  <div class="right_resize">
-        <div class="right block">
-          <h2><span>Quick</span> Links</h2>
-          <ul>
-            <li><a href="{{route('groups.create')}}">Create New Group</a></li>
-            <li><a href="{{route('groups.index')}}">Groups</a></li>
-            <li><a href="{{route('customers.index')}}">Customers</a></li>
-            <li><a href="{{route('loans.index')}}">Loan Types</a></li>
-            <li><a href="{{route('credits.index')}}">Loan Requests</a></li>
-          </ul>
-        </div>
-
-
-
-            <div class="right block">
-          <h2><span>Search</span></h2>
-          <div class="search">
-
-
-
-<form action="/search" method="post" role="search">
-    {{ csrf_field() }}
-    <div class="input-group">
-        <input type="text" class="form-control" name="q" id="q" placeholder="Customer name" maxlength="50">
-      <button type="submit" class="btn btn-info btn-sm mb-1">Submit</button>
-    </div>
-</form>
-
-          </div>
-          <div class="clr"></div>
-        </div>
-
-
-
-  </div>
-
-  </div>
-
-
-
-
-
 </div>
-</div>
+
+  </div>
+
+
+
+
+
+
+ </div><!--/center-->
+
+
+
+</div><!--/container-fluid-->
+
 
 
 @endsection

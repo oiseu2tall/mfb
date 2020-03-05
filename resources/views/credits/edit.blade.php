@@ -1,30 +1,29 @@
-
-
 @extends('layouts.app')
 @section('content')
-<div class="row">
-  <div class="col-sm-8 offset-sm-2">
+
 @if($errors->all())
   <div class="alert alert-danger">
-@foreach($errors->all() as $error)
+    @foreach($errors->all() as $error)
     <li>{{$error}}</li>
     @endforeach
   </div>
 @endif
 
-@if (session()->has('message'))
-  <div>
-    {{session()->get('message')}}
-  </div>
-@endif
 
+<div class="container-fluid">
+
+
+  <!--center-->
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-xs-12">
 
 <form action="{{route('credits.update', $credit->id)}}" onsubmit="return confirm('Are you sure you want to update this customer loan request?')" method="post" class="register">
   @csrf
   @method('put')
-<h1>Edit loan Request</h1>
+<h1>Edit Loan Request</h1>
 <fieldset class="row1">
-                <legend>Loan Request
+                <legend>{{$credit->Customer->first_name}} {{$credit->Customer->surname}}
                 </legend>
                   <label class="obinfo">* obligatory fields
                     </label>
@@ -58,7 +57,20 @@
 <div><button class="button">Submit &raquo;</button></div>
 </form>
         </div>
-    </div>
+
+  </div>
+
+
+
+
+
+
+ </div><!--/center-->
+
+
+
+</div><!--/container-fluid-->
+
 
 @endsection
   

@@ -1,8 +1,6 @@
-
 @extends('layouts.app')
 @section('content')
-<div class="row">
-  <div class="col-sm-8 offset-sm-2">
+
 @if($errors->all())
   <div class="alert alert-danger">
     @foreach($errors->all() as $error)
@@ -11,11 +9,14 @@
   </div>
 @endif
 
-<div class="body_bg">
-    <div class="body">
 
-<div class="row">
-<div class="col-sm-8">
+<div class="container-fluid">
+
+
+  <!--center-->
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-xs-12">
 
   <a href="{{route('loans.create')}}">Create A New Loan</a>
   <h1 class="display-6">All Loan Types</h1>
@@ -26,9 +27,9 @@
   <thead>
         <tr>
           <td>NAME</td>
-          <td>PRICIPAL</td>
-          <td>INTREST</td>
-          <td>DURATION</td>
+          <td>PRINCIPAL</td>
+          <td>INTEREST</td>
+          <td>DURATION<br/>(weeks)</td>
           <td>WEEKLY REMITTANCE</td>
           <td colspan="2">ACTIONS</td>
         </tr>
@@ -60,49 +61,7 @@
 </table>
 
 
-  </div>
-
-  <div class="right_resize">
-        <div class="right block">
-          <h4><a href="{{ route('home') }}">HOME</a></h4>
-          <h2><span>Quick</span> Links</h2>
-          <ul>
-            <li><a href="{{route('loans.create')}}">Create Loan Type</a></li>
-            <li><a href="{{route('groups.index')}}">Groups</a></li>
-            <li><a href="{{route('customers.index')}}">Customers</a></li>
-            <li><a href="{{route('loans.index')}}">Loan Types</a></li>
-            @cannot('isCashOfficer')
-            <li><a href="{{route('credits.index')}}">All Disbursed Loans</a></li>
-            @endcannot
-            @can('isAdmin')
-            <li><a href="{{route('loans.create')}}">Create New Loan Stage</a></li>
-            <li><a href="{{ route('register') }}">Create New User</a></li>
-            @endcan
-          </ul>
-        </div>
-
-
-
-            <div class="right block">
-          <h2><span>Search</span></h2>
-          <div class="search">
-
-
-
-<form action="/search" method="post" role="search">
-    {{ csrf_field() }}
-    <div class="input-group">
-        <input type="text" class="form-control" name="q" id="q" placeholder="Customer name" maxlength="50">
-      <button type="submit" class="btn btn-info btn-sm mb-1">Submit</button>
-    </div>
-</form>
-
-          </div>
-          <div class="clr"></div>
-        </div>
-
-        
-  </div>
+ </div>
 
   </div>
 
@@ -110,8 +69,12 @@
 
 
 
-</div>
-</div>
+
+ </div><!--/center-->
+
+
+
+</div><!--/container-fluid-->
 
 
 @endsection

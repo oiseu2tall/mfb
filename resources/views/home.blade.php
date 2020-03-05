@@ -1,66 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
 
-                <div class="card-header">Dashboard
-                    <div class="top-right links">
-                    <!--
-                    @can('isAdmin')
-                    
-                            <a href="{{ route('register') }}">Register User</a>
-                        
-                    
-                    @endcan
-                -->
-                </div>
-                </div>
-                <!--
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-
-                    You are logged in!
-                </div>
-            -->
-            </div>
-        </div>
-    </div>
-
-
-
-<div class="body_bg">
-    <div class="body">
-<div class="left_resize block">
-        <div class="left">
-            
-          <h4>User: <span>{{Auth::user()->name}}</span> {{Auth::user()->middle_name}} {{Auth::user()->first_name}}</h4>
-          <h4>Role: {{Auth::user()->role}}</h4>
-          
-
-
-<div class="floate">
-    <!--
-  
-
-  -->
+@if($errors->all())
+  <div class="alert alert-danger">
+    @foreach($errors->all() as $error)
+    <li>{{$error}}</li>
+    @endforeach
   </div>
-           
-        </div>
-            <div class="bg"></div>
+@endif
 
 
-              <div class="left">
-                <h2><span>My Groups</span></h2>
 
-    <table class="table table-striped">
+<div class="container-fluid">
+
+
+
+  <!--center-->
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-xs-12">
+      <h2><i class="fa fa-user"></i>  <span style="text-transform: uppercase;">{{Auth::user()->name}}</span> {{Auth::user()->middle_name}} {{Auth::user()->first_name}}</h2>
+      <h4> Role: {{Auth::user()->role}}</h4>
+      <hr>
+      <h3>My Groups</h3>
+        <table class="table table-striped">
 <thead>
         <tr>
           <td>Name</td>
@@ -92,11 +56,13 @@
   @endforeach
 </tbody>
 </table>
-
-                
+        
       </div>
-
-@can('isAdmin')
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12">
+        @can('isAdmin')
 
 <h2><span>All Users</span></h2>
 @foreach($users->sortBy('name') as $user)
@@ -125,68 +91,19 @@
 @endforeach
 
 @endcan
-
-
-
-
-
-</div><!--end left resise blk-->
-
-
-
-             <div class="right_resize">
-        <div class="right block">
-          <h2><span>Quick</span> Links</h2>
-          <ul>
-            <li><a href="{{route('groups.create')}}">Create New Group</a></li>
-            <li><a href="{{route('customers.create')}}">Create New Customer</a></li>
-            <li><a href="{{route('groups.index')}}">All Groups</a></li>
-            <li><a href="{{route('customers.index')}}">All Customers</a></li>
-            <li><a href="{{route('loans.index')}}">All Loan Stages</a></li>
-            @can('isAdmin')
-            <li><a href="{{route('loans.create')}}">Create New Loan Stage</a></li>
-            <li><a href="{{ route('register') }}">Create New User</a></li>
-            @endcan
-            @cannot('isCashOfficer')
-            <li><a href="{{route('credits.index')}}">All Disbursed Loans</a></li>
-            @endcannot
-          </ul>
-        </div>
-
-
-
-
-            <div class="right block">
-          <h2><span>Search</span></h2>
-          <div class="search">
-
-
-
-<form action="/search" method="post" role="search">
-    {{ csrf_field() }}
-    <div class="input-group">
-        <input type="text" class="form-control" name="q" id="q" placeholder="Customer name" maxlength="50">
-      <button type="submit" class="btn btn-info btn-sm mb-1">Submit</button>
+        
+      </div>
     </div>
-</form>
-
-          </div>
-          <div class="clr"></div>
-        </div>
+    <hr>      
+ 
 
 
 
 
-</div> 
-
-</div>
-
-<!-- my groups
-    
--->
+  </div><!--/center-->
 
 
 
-
+</div><!--/container-fluid-->
 
 @endsection

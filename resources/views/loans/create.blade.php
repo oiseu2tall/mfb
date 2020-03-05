@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="row">
-  <div class="col-sm-8 offset-sm-2">
+
 @if($errors->all())
   <div class="alert alert-danger">
     @foreach($errors->all() as $error)
@@ -9,6 +8,17 @@
     @endforeach
   </div>
 @endif
+
+
+<div class="container-fluid">
+
+
+  <!--center-->
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-xs-12">
+
+        
 <form action="{{route('loans.store')}}" method="post" class="register">
   @csrf
 
@@ -75,6 +85,18 @@
     <div><button class="button">Submit &raquo;</button></div>
 
 </form>
-</div>
-</div>
+ </div>
+
+  </div>
+
+
+
+
+
+
+ </div><!--/center-->
+
+
+
+</div><!--/container-fluid-->
 @endsection

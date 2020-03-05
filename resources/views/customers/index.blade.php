@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 @section('content')
 
@@ -10,26 +9,15 @@
   </div>
 @endif
 
-<div class="body_bg">
-    <div class="body" style="width: 1100px">
-<!--
-      <div class="right_resize">
-        <div class="right block">
-          <h2><span style="color: #abda0f;">Quick</span> Links</h2>
-          <ul>
-            <li><a href="{{route('customers.create')}}">Create New Customer</a></li>
-            <li><a href="{{route('groups.index')}}">Groups</a></li>
-            <li><a href="{{route('customers.index')}}">Customers</a></li>
-            <li><a href="{{route('loans.index')}}">Loan Types</a></li>
-            <li><a href="{{route('credits.index')}}">Loan Requests</a></li>
-          </ul>
-        </div>
-  </div>
--->
 
-<div class="row">
+<div class="container-fluid">
 
-<div class="col-sm-8">
+
+  <!--center-->
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-xs-12">
+     
 
   <h4><a href="{{route('customers.create')}}">Create New Customer</a></h4>
   <h1 class="display-4">Customers</h1>
@@ -79,47 +67,7 @@
 </tbody>
 </table>
 
-
-  </div>
-
-
-<div class="right_resize">
-        <div class="right block">
-          <h4><a href="{{ route('home') }}">HOME</a></h4>
-          <h2><span style="color: #abda0f;">Quick</span> Links</h2>
-          <ul>
-            <li><a href="{{route('customers.create')}}">Create New Customer</a></li>
-            <li><a href="{{route('groups.index')}}">Groups</a></li>
-            <li><a href="{{route('customers.index')}}">Customers</a></li>
-            <li><a href="{{route('loans.index')}}">Loan Types</a></li>
-            @cannot('isCashOfficer')
-            <li><a href="{{route('credits.index')}}">All Disbursed Loans</a></li>
-            @endcannot
-            @can('isAdmin')
-            <li><a href="{{route('loans.create')}}">Create New Loan Stage</a></li>
-            <li><a href="{{ route('register') }}">Create New User</a></li>
-            @endcan
-            
-          </ul>
-        </div>
-            <div class="right block">
-          <h2><span>Search</span></h2>
-          <div class="search">
-
-
-
-<form action="/search" method="post" role="search">
-    {{ csrf_field() }}
-    <div class="input-group">
-        <input type="text" class="form-control" name="q" id="q" placeholder="Customer name" maxlength="50">
-      <button type="submit" class="btn btn-info btn-sm mb-1">Submit</button>
-    </div>
-</form>
-
-          </div>
-          <div class="clr"></div>
-        </div>
-
+ </div>
 
   </div>
 
@@ -127,29 +75,12 @@
 
 
 
-</div>
-  
+
+ </div><!--/center-->
 
 
 
-<!--
-<div class="right_resize">
-        <div class="right block">
-          <h2><span>Quick</span> Links</h2>
-          <ul>
-            <li><a href="{{route('customers.create')}}">Create New Customer</a></li>
-            <li><a href="{{route('groups.index')}}">Groups</a></li>
-            <li><a href="{{route('customers.index')}}">Customers</a></li>
-            <li><a href="{{route('loans.index')}}">Loan Types</a></li>
-            <li><a href="{{route('credits.index')}}">Loan Requests</a></li>
-          </ul>
-        </div>
-  </div>
--->
-
-
-</div>
-</div>
+</div><!--/container-fluid-->
 
 
 

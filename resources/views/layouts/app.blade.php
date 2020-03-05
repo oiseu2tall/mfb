@@ -2,7 +2,8 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -11,60 +12,47 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   
 
-    <!-- Fonts -->
+<!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
 
-
-<!--
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
- 
-<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
- 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
- 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
- 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
- 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
--->
-
-
-
-
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/form.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"> 
+    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
- @auth                   <ul class="navbar-nav mr-auto">
-<li class="nav-item">
-    <a href="{{ route('home') }}">DASHBOARD</a>
-</li>
-@endauth
-                    </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" rel="home" href="{{ url('/home') }}">{{ config('app.name', 'Laravel') }}</a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+            @auth
+            <li><a href="{{ route('home') }}">DASHBOARD</a></li>
+           <!-- <li><a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('LOGOUT') }}
+                                    </a></li>  -->
+            @endauth
+            <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -74,22 +62,14 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} {{ Auth::user()->first_name }}<span class="caret"></span>
-                                </a>
+                            @endguest
+@auth
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                {{ Auth::user()->name }} {{ Auth::user()->first_name }} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
 
-
-<!--
-<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('home') }}">
-                                    {{ __('Dashboard') }}</a></div>-->
-
-
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                <li>  <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -97,24 +77,125 @@
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+                                    </form> </li>
+                                    <li class="divider"></li>
+@endauth
+                <!-- <li><a href="#">Another action</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li class="divider"></li>
+                <li><a href="#">One more separated link</a></li>-->
+              </ul>
+            </li>
+        </ul>
+        @auth
+        <div class="col-sm-3 col-md-3 pull-right">
+          <form class="navbar-form" action="/search" method="post" role="search">
+            {{ csrf_field() }}
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search" name="q" id="q">
+                <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </div>
             </div>
-        </nav>
+          </form>
+        </div>
+        @endauth
+    </div>
+</nav>
+
+
+
+
+    
+
+        
+
+
+
+
+
+
+
+
+
+@auth
 
         <main class="py-4">
             
             @if(Session::has('message'))
 <p class="alert alert-info">{{ Session::get('message') }}</p>
 @endif
+    
+
+    <script type="text/javascript">
+    $(function(){
+
+    $('#slide-submenu').on('click',function() {                 
+        $(this).closest('.list-group').fadeOut('slide',function(){
+            $('.mini-submenu').fadeIn();    
+        });
+        
+      });
+
+    $('.mini-submenu').on('click',function(){       
+        $(this).next('.list-group').toggle('slide');
+        $('.mini-submenu').hide();
+    })
+})
+
+    
+</script>
+
+
+<!--side bar-->
+<div class="col-sm-4 col-md-3 sidebar">
+    <div class="mini-submenu">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </div>
+    <div class="list-group">
+        <span style="font-size: 22px;" class="list-group-item active">
+            QUICK LINKS
+            <span class="pull-right" id="slide-submenu">
+                <i class="fa fa-times"></i>
+            </span>
+        </span>
+        <a href="{{route('groups.create')}}" class="list-group-item">
+          <i class="fa fa-plus" aria-hidden="true"></i> Create New Group</a>
+       
+        <a href="{{route('customers.create')}}" class="list-group-item">
+          <i class="fa fa-plus" aria-hidden="true"></i> Create New Customer</a>
+
+        <a href="{{route(('groups.index'))}}" class="list-group-item">
+          <i class="fa fa-list" aria-hidden="true"></i> All Groups</a>
+
+        <a href="{{route('customers.index')}}" class="list-group-item">
+          <i class="fa fa-list" aria-hidden="true"></i> All Customers</a>
+
+        <a href="{{route('loans.index')}}" class="list-group-item">
+          <i class="fa fa-list" aria-hidden="true"></i> All Loan Stages</a>
+@can('isAdmin')
+        <a href="{{route('loans.create')}}" class="list-group-item">
+          <i class="fa fa-plus" aria-hidden="true"></i> Create New Loan Stage</a>
+
+        <a href="{{route('register')}}" class="list-group-item">
+          <i class="fa fa-plus" aria-hidden="true"></i> Create New User</a>
+@endcan
+            @cannot('isCashOfficer')
+        <a href="{{route('credits.index')}}" class="list-group-item">
+          <i class="fa fa-list" aria-hidden="true"></i> All Disbursed Loans</a>
+          @endcannot
+
+
+    </div>        
+</div><!-- end side bar-->
+@endauth
 
             @yield('content')
         </main>
-    </div>
+
 
 <!--
 
@@ -130,12 +211,6 @@
 </form>
 -->
 
-
 </body>
 
-<script>
-$(function () {
-  $('.date').datetimepicker();
-});
-</script>
 </html>

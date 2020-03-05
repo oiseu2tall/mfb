@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="row">
-  <div class="col-sm-8 offset-sm-2">
+
 @if($errors->all())
   <div class="alert alert-danger">
     @foreach($errors->all() as $error)
@@ -10,11 +9,14 @@
   </div>
 @endif
 
-@if (session()->has('message'))
-  <div>
-    {{session()->get('message')}}
-  </div>
-@endif
+
+<div class="container-fluid">
+
+
+  <!--center-->
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-xs-12">
 
 @if(Auth::user()->can('isAdmin') || Auth::user()->can('isManager') || (Auth::user()->can('isCashOfficer'))
                         &&($repayment->customer->group->user_id == Auth::user()->id))
@@ -57,6 +59,19 @@
 </form>
 @endif
     </div>
-        </div>
+
+  </div>
+
+
+
+
+
+
+ </div><!--/center-->
+
+
+
+</div><!--/container-fluid-->
+
 @endsection
 

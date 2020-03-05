@@ -1,8 +1,6 @@
-<!--use Carbon\Carbon;-->
 @extends('layouts.app')
 @section('content')
-<div class="row">
-  <div class="col-sm-8 offset-sm-2">
+
 @if($errors->all())
   <div class="alert alert-danger">
     @foreach($errors->all() as $error)
@@ -11,14 +9,23 @@
   </div>
 @endif
 
-<div class="body_bg">
-    <div class="body">
 
-<div class="left_resize block">
-        <div class="left">
+<div class="container-fluid">
+
+
+  <!--center-->
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-xs-12">
           <h2><span>{{$customer->surname}} </span>{{$customer->middle_name}} {{$customer->first_name}}</h2>
-          <img src="{{ asset('images/'.$customer->image_name) }}" alt="Profile Picture" width="200" class="floated" />
-    <div style="float:right; width: 400px; display: block; border: 1px solid #eee; padding: 20px; font-size: 14px; ">
+
+<a href="{{route('credits.create')}}" onclick="{{session(['customerid' => $customer->id])}}" style="float: right; font-size: 22px;">
+  <i class="fa fa-money" aria-hidden="true"></i>  Give Loan</a>
+
+          <img src="{{ asset('images/'.$customer->image_name) }}" alt="Profile Picture" width="300" class="floated" />
+
+
+    <div style="float:left; width: 60%; display: block; border: 1px solid #eee; padding: 20px; font-size: 14px; ">
 <h4>
   CASH OFFICER: {{$customer->group->user->name}} {{$customer->group->user->middle_name}} {{$customer->group->user->first_name}}
 </h4>          
@@ -43,14 +50,14 @@
       </form>
   </div>
     @endif 
-    </div><!--dummy-->      
-        </div>
-            <div class="bg"></div>
+    </div>
+
+  </div>
+<hr>
 
 
-              <div class="left">
-
-
+<div class="row">
+      <div class="col-xs-12">
 <h1>Loan Disbursed to {{$customer->surname}} {{$customer->first_name}}</h1>
     <ul>
 @foreach($customer->credits as $credit)
@@ -141,77 +148,26 @@
             <div><button style="background-color: #abda0f; color: #fff;">Submit &raquo;</button></div>
 </form>
 @endif
-<div class="bg"></div>
+<hr>
 
 @endforeach
 </ul>
-                
-      
-
  </div>
 
-
-</div><!--end left resise blk-->
-
-
-
-             <div class="right_resize">
-        <div class="right block">
-          <h4><a href="{{ route('home') }}">My Dashboard</a></h4>
-          <h2><span>Quick</span> Links</h2>
-          <ul>
-
-            <li><a href="{{route('credits.create')}}" onclick="{{session(['customerid' => $customer->id])}}">Give Loan to {{$customer->surname}} {{$customer->middle_name}} {{$customer->first_name}} <!--{{session('customerid')}}--></a></li>
-            <li><a href="{{route('customers.create')}}">Create New Customer</a></li>
-            <li><a href="{{route('groups.index')}}">Groups</a></li>
-            <li><a href="{{route('customers.index')}}">Customers</a></li>
-            <li><a href="{{route('loans.index')}}">All Loans Types</a></li>
-            
-            @can('isAdmin')
-            <li><a href="{{route('loans.create')}}">Create New Loan Stage</a></li>
-            <li><a href="{{ route('register') }}">Create New User</a></li>
-            @endcan
-            @cannot('isCashOfficer')
-            <li><a href="{{route('credits.index')}}">All Disbursed Loans</a></li>
-            @endcannot
-            
-          </ul>
-        </div>
+  </div>
 
 
 
 
-            <div class="right block">
-          <h2><span>Search</span></h2>
-          <div class="search">
+
+
+ </div><!--/center-->
 
 
 
-<form action="/search" method="post" role="search">
-    {{ csrf_field() }}
-    <div class="input-group">
-        <input type="text" class="form-control" name="q" id="q" placeholder="Customer name" maxlength="50">
-      <button type="submit" class="btn btn-info btn-sm mb-1">Submit</button>
-    </div>
-</form>
-
-          </div>
-          <div class="clr"></div>
-        </div>
-</div><!--end right resize block-->
-
-
-
-</div> 
-
-</div>
-
-
-
-    </div>
-        </div>
-        
+</div><!--/container-fluid-->
 
 @endsection
+       
 
 

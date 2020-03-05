@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="row">
-  <div class="col-sm-8 offset-sm-2">
+
 @if($errors->all())
   <div class="alert alert-danger">
     @foreach($errors->all() as $error)
@@ -10,6 +9,13 @@
   </div>
 @endif
 
+<div class="container-fluid">
+
+
+  <!--center-->
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-xs-12">
 
 <form action="{{route('groups.store')}}" method="post" class="register">
   @csrf
@@ -46,7 +52,7 @@
 
                   <label>Venue *
                     </label>
-                    <textarea name="venue" id="venue" value="{{ old('venue') }}"></textarea>
+                    <textarea name="venue" id="venue">{{ old('venue') }}</textarea>
 
 @if(Auth::user()->can('isAdmin') || Auth::user()->can('isManager'))
                   <label>Cash Officer *
@@ -70,7 +76,19 @@
 <div><button class="button">Submit &raquo;</button></div>
 </form>
         </div>
-    </div>
+
+  </div>
+
+
+
+
+
+
+ </div><!--/center-->
+
+
+
+</div><!--/container-fluid-->
 
 @endsection
 
