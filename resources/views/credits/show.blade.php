@@ -19,11 +19,17 @@
       <div class="col-xs-12">
           <h2>CUSTOMER: <a href="{{route('customers.show', $credit->customer->id)}}">{{$credit->customer->first_name}} {{$credit->customer->surname}}</a></h2>
           
-          
-<h4>Start Date: <span>{{$credit->start_date}}</span></h4>
-<h4>End Date: {{$credit->end_date}}</h4>
-<h4><span>{{$credit->loan->name}}</span> Loan Type</h4>
-<h4>{{$credit->customer->group->name}} Group</h4>
+   <div class="col-sm-5 col-xs-6 tital " >Start Date:</div><div class="col-sm-7 col-xs-6 ">{{$credit->start_date}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
+
+<div class="col-sm-5 col-xs-6 tital " >End Date:</div><div class="col-sm-7 col-xs-6 ">{{$credit->end_date}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
+
+<div class="col-sm-5 col-xs-6 tital " >GROUP:</div><div class="col-sm-7 col-xs-6 ">{{$credit->customer->group->name}} Group</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
 
 
 <div class="floate">

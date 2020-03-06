@@ -19,13 +19,22 @@
       <div class="col-xs-12">
      
           <h2>{{$repayment->customer->surname}} {{$repayment->customer->first_name}} <span>{{$repayment->loan->name}}</span> Repayment</h2>
-          
-<h4>Installment: <span>{{$repayment->installment}}</span></h4>
-<h4>Savings: {{$repayment->savings}}</h4>
-<h4>Extra Savings: {{$repayment->extra_savings}}</h4>
-<h4>Payment Date: {{Carbon\Carbon::parse($repayment->payment_date)->toFormattedDateString()}}</h4>
 
+<div class="col-sm-5 col-xs-6 tital " >Installment:</div><div class="col-sm-7 col-xs-6 ">{{$repayment->installment}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
 
+<div class="col-sm-5 col-xs-6 tital " >Savings:</div><div class="col-sm-7 col-xs-6 ">{{$repayment->savings}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
+
+<div class="col-sm-5 col-xs-6 tital " >Extra Savings:</div><div class="col-sm-7 col-xs-6 ">{{$repayment->extra_savings}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
+
+<div class="col-sm-5 col-xs-6 tital " >Payment Date:</div><div class="col-sm-7 col-xs-6 ">{{Carbon\Carbon::parse($repayment->payment_date)->toFormattedDateString()}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
 
 <div class="floate">
   @if(

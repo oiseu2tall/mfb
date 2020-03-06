@@ -18,12 +18,27 @@
     <div class="row">
       <div class="col-xs-12">
           <h2><span>{{$group->name}}</span> Group</h2>
-          
-<h4>Group Name: <span>{{$group->name}}</span></h4>
-<h4>Meeting Days: {{$group->meeting_day}}</h4>
-<h4>Venue: {{$group->venue}}</h4>
-<h4>Group Leader:   </h4>
-<h4>Cash Officer: {{ $group->User->name }} {{$group->User->first_name}}</h4>
+
+    <div class="col-sm-5 col-xs-6 tital " >Group Name:</div><div class="col-sm-7 col-xs-6 ">{{$group->name}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
+
+<div class="col-sm-5 col-xs-6 tital " >Meeting Days:</div><div class="col-sm-7 col-xs-6 ">{{$group->meeting_day}}
+</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
+
+<div class="col-sm-5 col-xs-6 tital " >Venue:</div><div class="col-sm-7 col-xs-6 ">{{$group->venue}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
+
+<div class="col-sm-5 col-xs-6 tital " >Group Leader:</div><div class="col-sm-7 col-xs-6 "></div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
+
+<div class="col-sm-5 col-xs-6 tital " >Cash Officer:</div><div class="col-sm-7 col-xs-6 ">{{ $group->User->name }} {{$group->User->first_name}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
 
 
 

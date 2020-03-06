@@ -17,21 +17,46 @@
   <div class="col-sm-8">
     <div class="row">
       <div class="col-xs-12">
-          <h2><span>{{$loan->name}}</span> Loan Type</h2>
-          
-<h4>Loan Type: <span>{{$loan->name}}</span></h4>
-<h4>Description: {{$loan->description}}</h4>
-<h4>Duration: {{$loan->duration}} weeks</h4>
-<h4>Principal: {{$loan->principal}}</h4>
-<h4>Interest: {{$loan->interest}}</h4>
-<h4>Total Savings: {{$loan->total_savings}}</h4>
-<h4>Weekly Installment: {{$loan->weekly_remittance}}</h4>
-<h4>Weekly Savings: {{$loan->weekly_savings}}</h4>
+          <h2><span>{{$loan->name}}</span> Loan</h2>
+
+<div class="col-sm-5 col-xs-6 tital " >Loan Type:</div><div class="col-sm-7 col-xs-6 ">{{$loan->name}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
+
+<div class="col-sm-5 col-xs-6 tital " >Description:</div><div class="col-sm-7 col-xs-6 ">{{$loan->description}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
+
+<div class="col-sm-5 col-xs-6 tital " >Duration:</div><div class="col-sm-7 col-xs-6 ">{{$loan->duration}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
+
+<div class="col-sm-5 col-xs-6 tital " >Principal:</div><div class="col-sm-7 col-xs-6 ">{{$loan->principal}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
+
+
+<div class="col-sm-5 col-xs-6 tital " >Interest:</div><div class="col-sm-7 col-xs-6 ">{{$loan->interest}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
+
+<div class="col-sm-5 col-xs-6 tital " >Total Savings:</div><div class="col-sm-7 col-xs-6 ">{{$loan->total_savings}}
+</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
+
+<div class="col-sm-5 col-xs-6 tital " >Weekly Installment:</div><div class="col-sm-7 col-xs-6 ">{{$loan->weekly_remittance}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
+
+<div class="col-sm-5 col-xs-6 tital " >Weekly Savings:</div><div class="col-sm-7 col-xs-6 ">{{$loan->weekly_savings}}</div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div><br>
 
 
 @can('isAdmin')
 <div class="floate">
-<a href="{{route('loans.edit', $loan->id)}}" class="btn btn-info btn-sm mb-2">Edit</a> &nbsp; &nbsp;
+<a href="{{route('loans.edit', $loan->id)}}" class="btn btn-info btn-sm mb-2">Edit</a> &nbsp;
         <form onsubmit="return confirm('Are you sure you want to delete this loan')" method="post" action="{{route('loans.destroy', $loan->id)}}">
           @csrf
           @method('delete')

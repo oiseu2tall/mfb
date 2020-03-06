@@ -30,45 +30,15 @@
   CASH OFFICER: {{$customer->group->user->name}} {{$customer->group->user->middle_name}} {{$customer->group->user->first_name}}
 </h4>          
 <h4>GROUP: <a href="{{route('groups.show', $customer->group_id)}}">{{$customer->group->name}}</a></h4>
-
-
-<div class="col-sm-5 col-xs-6 tital " >CARD NUMBER:</div><div class="col-sm-7 col-xs-6 ">{{$customer->card_number}}</div>
-     <div class="clearfix"></div>
-<div class="bot-border"></div><br/>
-
-<div class="col-sm-5 col-xs-6 tital " >ALIAS:</div><div class="col-sm-7 col-xs-6 ">{{$customer->aka}}</div>
-     <div class="clearfix"></div>
-<div class="bot-border"></div><br/>
-
-<div class="col-sm-5 col-xs-6 tital " >D.O.B:</div><div class="col-sm-7 col-xs-6 ">{{Carbon\Carbon::parse($customer->dateOfBirth)->toFormattedDateString()}}</div>
-     <div class="clearfix"></div>
-<div class="bot-border"></div><br/>
-
-<div class="col-sm-5 col-xs-6 tital " >ADDRESS:</div><div class="col-sm-7 col-xs-6 ">{{$customer->address}}</div>
-     <div class="clearfix"></div>
-<div class="bot-border"></div><br/>
-
-<div class="col-sm-5 col-xs-6 tital " >EMAIL:</div><div class="col-sm-7 col-xs-6 ">{{$customer->email}}</div>
-     <div class="clearfix"></div>
-<div class="bot-border"></div><br/>
-
-<div class="col-sm-5 col-xs-6 tital " >PHONE:</div><div class="col-sm-7 col-xs-6 ">{{$customer->phone}}</div>
-     <div class="clearfix"></div>
-<div class="bot-border"></div><br/>
-
-<div class="col-sm-5 col-xs-6 tital " >GUARANTOR:</div><div class="col-sm-7 col-xs-6 ">{{$customer->guarantor_name}}</div>
-     <div class="clearfix"></div>
-<div class="bot-border"></div><br/>
-
-<div class="col-sm-5 col-xs-6 tital " >GUARANTOR ADDRESS:</div><div class="col-sm-7 col-xs-6 ">{{$customer->guarantor_address}}</div>
-     <div class="clearfix"></div>
-<div class="bot-border"></div><br/>
-
-<div class="col-sm-5 col-xs-6 tital " >GUARANTOR PHONE:</div><div class="col-sm-7 col-xs-6 ">{{$customer->guarantor_phone}}</div>
-     <div class="clearfix"></div>
-<div class="bot-border"></div>
-
-<br/><br/>
+<h6>CARD NUMBER:</h6> {{$customer->card_number}}<br/>
+<h6>ALIAS:</h6> {{$customer->aka}}<br/>
+<h6>D.O.B:</h6> {{Carbon\Carbon::parse($customer->dateOfBirth)->toFormattedDateString()}}<br/>
+<h6>ADDRESS:</h6> <span style="text-align: center; display: inline-block;">{{$customer->address}}</span><br/>
+<h6>EMAIL:</h6> {{$customer->email}}<br/>
+<h6>PHONE:</h6> {{$customer->phone}}<br/>
+<h6>GUARANTOR:</h6> {{$customer->guarantor_name}}<br/>
+<h6>GUARANTOR ADDRESS:</h6><span style="text-align: center; display: inline-block;"> {{$customer->guarantor_address}}</span><br/><br/>
+<h6>GUARANTOR PHONE: </h6>{{$customer->guarantor_phone}}<br/><br/>
 
 
 @if(Auth::user()->can('isAdmin') || Auth::user()->can('isManager') || ($customer->group->user_id == Auth::user()->id))
