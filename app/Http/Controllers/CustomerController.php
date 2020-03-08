@@ -105,8 +105,12 @@ imagejpeg($image, public_path('images/'.$filename), 60);
         $customer->group_id = $request->group_id;
         $customer->image_name = $filename;
     */
-
-   $id = $request->get('id');
+        $id = $request->get('id');
+        $lead = null;
+        if($request->has('group_leader')){
+            $lead = $request->get('group_id');
+        }
+   
 
    $customer = new Customer([
             'first_name' => $request->get('first_name'),
@@ -115,6 +119,7 @@ imagejpeg($image, public_path('images/'.$filename), 60);
             'aka' => $request->get('aka'),
             'dateOfBirth' => $request->get('dateOfBirth'),
             'phone' => $request->get('phone'),
+            'group_leader' => $lead,
             'email' => $request->get('email'),
             'address' => $request->get('address'),
             'guarantor_name' => $request->get('guarantor_name'),
@@ -128,7 +133,7 @@ imagejpeg($image, public_path('images/'.$filename), 60);
 
         $customer->save();
         session()->flash('message', 'The Customer has been created successfully');
-        return redirect(route('customers.show', $this->$request->id));
+        return redirect(route('customers.show', $customer->id));
             }
             else{
 session()->flash('message', 'A record already exists with this customer names');
@@ -173,7 +178,7 @@ private function imagecreatefromjpegexif($filename)
     public function show(Customer $customer)
     {
         $groups = Group::all('id', 'name');
-        
+        //$custs = Customer::all();
         return view('customers.show', compact('customer'), compact('groups'));
     }
 
@@ -198,10 +203,11 @@ private function imagecreatefromjpegexif($filename)
      */
     public function update(Request $request, Customer $customer)
     {
-        
-        if((!Gate::allows('isAdmin') && !Gate::allows('isManager')) || Auth::user()->id == $customer->group->user_id){
-            abort(403,"Sorry, You don't have permission to view this page");
+       /** 
+        if((Gate::allows('isAdmin') && Gate::allows('isManager')) || Auth::user()->id == $customer->group->user_id){
+            abort(403,"Sorry, You don't have permission to edit this page");
         }
+        **/
 
 
 $this->validate($request, [
@@ -241,6 +247,11 @@ imagejpeg($image, public_path('images/'.$filename), 60);
 $customer->image_name = $filename;
     }
 
+$lead = null;
+        if($request->has('group_leader') && ($customer->group_id == $request->group_id)){
+            $lead = $request->get('group_id');
+        }
+
         $customer->first_name = $request->first_name;
         $customer->middle_name = $request->middle_name;
         $customer->surname = $request->surname;
@@ -254,6 +265,7 @@ $customer->image_name = $filename;
         $customer->guarantor_address = $request->guarantor_address;
         $customer->guarantor_phone = $request->guarantor_phone;
         $customer->group_id = $request->group_id;
+        $customer->group_leader = $lead;
         
 
         $customer->save();

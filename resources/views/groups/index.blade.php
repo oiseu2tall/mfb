@@ -28,7 +28,7 @@
         <tr>
           <td>Name</td>
           <td>Meeting Day</td>
-          <td>Venue</td>
+          <td>Cash Officer</td>
           <td colspan="2">Actions</td>
         </tr>
     </thead>
@@ -38,8 +38,9 @@
 
         <td><a href="{{route('groups.show', $group->id)}}"><span style="color:#35b2ef;">
           {{$group->name}}</span></a></td>
+
        <td>{{$group->meeting_day}}</td>
-       <td>{{$group->venue}}</td>
+       <td>{{$group->user->name}} {{$group->user->middle_name}} {{$group->user->first_name}}</td>
 
 
 @if(

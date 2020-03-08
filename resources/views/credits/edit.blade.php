@@ -30,11 +30,11 @@
                 <p>
                     <label>Start Date *
                     </label>
-                    <input type="date" name="start_date" id="start_date" 
+                    <input type="text" name="start_date" id="start_date" 
                     value='{{$credit->start_date}}'/>
                     <label>End Date *
                     </label>
-                    <input type="date" name="end_date" id="end_date" value='{{$credit->end_date}}' />
+                    <input type="text" name="end_date" id="end_date" value='{{$credit->end_date}}' />
                  </p>
                  <p>
                   <label>Loan Type *
@@ -71,6 +71,17 @@
 
 </div><!--/container-fluid-->
 
+<script>
+$('#start_date').datetimepicker({
+inline:false,timepicker: false,
+});
+</script>
+
+<script>
+$('#end_date').datetimepicker({
+inline:false,timepicker: false,
+});
+</script>
 
 @endsection
   

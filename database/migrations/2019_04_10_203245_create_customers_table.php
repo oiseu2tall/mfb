@@ -21,6 +21,7 @@ class CreateCustomersTable extends Migration
             $table->string('middle_name', 100)->nullable();
             $table->string('surname', 100);
             $table->string('aka', 100)->nullable();
+            $table->bigInteger('group_leader')->unsigned()->unique()->nullable();
             $table->text('address');
             $table->string('phone', 20);
             $table->string('email', 50)->unique()->nullable();

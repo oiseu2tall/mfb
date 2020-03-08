@@ -30,7 +30,7 @@
                 <p>
                     <label>Start Date *
                     </label>
-                    <input type="date" name="start_date" id="start_date" value="{{ old('start_date') }}"/>
+                    <input type="text" name="start_date" id="start_date" value="{{ old('start_date') }}"/>
                     <!--
                     <label>End Date *
                     </label>
@@ -73,6 +73,12 @@
 
 </div><!--/container-fluid-->
 
+
+<script>
+$('#start_date').datetimepicker({
+inline:false,timepicker: false,
+});
+</script>
 
 @endsection
   

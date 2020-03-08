@@ -34,7 +34,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::any('/search',function(){
 
     $q = Request::get ( 'q' );
-    $result = DB::table('customers', 'groups')->select('customers.id','surname', 'middle_name', 'first_name','aka','name', 'groups.id as groupid')->join('groups', 'groups.id', '=', 'customers.group_id')->where('surname','LIKE','%'.$q.'%')->orWhere('middle_name','LIKE','%'.$q.'%')->orWhere('first_name','LIKE','%'.$q.'%')->get();
+    $result = DB::table('customers', 'groups')->select('customers.id','surname', 'middle_name', 'first_name','aka','name', 'groups.id as groupid', 'groups.user_id')->join('groups', 'groups.id', '=', 'customers.group_id')->where('surname','LIKE','%'.$q.'%')->orWhere('middle_name','LIKE','%'.$q.'%')->orWhere('first_name','LIKE','%'.$q.'%')->get();
     if(count($result) > 0)
         return view('search')->withDetails($result)->withQuery ( $q );
     else return view ('search')->withMessage('No Details found. Try to search again !');

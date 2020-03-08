@@ -8,7 +8,8 @@
                 <div class="card-header">{{ __('Register User') }}</div>
 
                 <div class="card-body">
-                    @can('isAdmin')
+                   <?php //@can('isAdmin') ?>
+                   @can('isAdmin')
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -111,6 +112,7 @@
                         </div>
                     </form>
                     @endcan
+                    <?php //@endcan ?>
                 </div>
             </div>
         </div>

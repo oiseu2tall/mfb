@@ -31,6 +31,14 @@
 </h4>          
 <h4>GROUP: <a href="{{route('groups.show', $customer->group_id)}}">{{$customer->group->name}}</a></h4>
 
+<p>GROUP LEADER: 
+
+@foreach($customer->group->customers as $leader)
+    @if($leader->group_leader == $customer->group_id)
+    <a href="{{route('customers.show', $leader->id)}}">{{$leader->surname}} {{$leader->middle_name}} {{$leader->first_name}}</a>
+    @endif
+    @endforeach
+  </p>
 
 <div class="col-sm-5 col-xs-6 tital " >CARD NUMBER:</div><div class="col-sm-7 col-xs-6 ">{{$customer->card_number}}</div>
      <div class="clearfix"></div>
@@ -166,7 +174,7 @@
                     <input type="text" name="extra_savings" id="extra_savings"/>
                     <label>Date *
                     </label>
-                    <input type="date" name="payment_date" id="payment_date"/>
+                    <input type="input" name="payment_date" id="payment_date"/>
                     
                 </p>
                 <input name="customer_id" type="hidden" id="customer_id" value="{{$credit->customer_id}}" />
@@ -175,7 +183,7 @@
 
                 
             </fieldset>
-            <div><button style="background-color: #abda0f; color: #fff;">Submit &raquo;</button></div>
+            <div><button>Submit &raquo;</button></div>
 </form>
 @endif
 <hr>
@@ -196,6 +204,12 @@
 
 
 </div><!--/container-fluid-->
+
+<script>
+$('#payment_date').datetimepicker({
+inline:false,timepicker: false,
+});
+</script>
 
 @endsection
        

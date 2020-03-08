@@ -49,7 +49,7 @@
                 
                     <label>Payment Date *
                     </label>
-  <input type="date" name="payment_date" id="payment_date" value='{{$repayment->payment_date}}'/>
+  <input type="text" name="payment_date" id="payment_date" value='{{$repayment->payment_date}}'/>
            </p>
                 
             </fieldset>
@@ -72,6 +72,12 @@
 
 
 </div><!--/container-fluid-->
+
+<script>
+$('#payment_date').datetimepicker({
+inline:false,timepicker: false,
+});
+</script>
 
 @endsection
 

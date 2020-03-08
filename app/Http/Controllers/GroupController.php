@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Group;
 use App\User;
+use App\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Gate;
 
 class GroupController extends Controller
 {
+   private function leader()
+   {
+    $group_leader = Customer::first()->where('group_leader')->equal($group->id);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -71,7 +76,8 @@ class GroupController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Group $group)
-    {
+    {   
+        //$leaders = $group->customers->first()->where('group_leader', $group->id);
         return view('groups.show', compact('group'));
     }
 

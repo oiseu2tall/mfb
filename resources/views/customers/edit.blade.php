@@ -62,7 +62,7 @@
                 <p>
                     <label>Date of birth *
                     </label>
-<input type="date" name="dateOfBirth" id="dateOfBirth" value='{{$customer->dateOfBirth}}'/>
+<input type="text" name="dateOfBirth" id="dateOfBirth" value='{{$customer->dateOfBirth}}'/>
                 </p>
                 <p>
                     <label>Address *
@@ -115,6 +115,19 @@
        </select> 
                     @endif
                 </p>
+
+
+                <p>
+                    <label>Group Leader 
+                    </label>
+             @if(isset($customer->group_leader))       
+      <input type="checkbox" name="group_leader" id="group_leader" value='{{ $customer->group_leader }}' checked>
+            @else
+            <input type="checkbox" name="group_leader" id="group_leader" value='{{ $customer->group_leader }}'>
+            @endif
+
+                </p>
+
                 
    </fieldset>
 
@@ -154,5 +167,14 @@
 
 
 </div><!--/container-fluid-->
+
+
+            <script>
+$('#dateOfBirth').datetimepicker({
+inline:false,timepicker: false,
+});
+</script>
+
+
 @endsection
 

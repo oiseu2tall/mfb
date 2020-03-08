@@ -44,7 +44,7 @@
 
  @if(
         (Auth::user()->can('isAdmin'))
-            ||($customer->group->user_id == Auth::user()->id)||
+            ||($customer->user_id == Auth::user()->id)||
                 (Auth::user()->can('isManager'))
                 )
         <td style="display: inline-flex;">

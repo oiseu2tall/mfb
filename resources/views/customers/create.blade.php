@@ -60,7 +60,7 @@
                 <p>
                     <label>Date of birth *
                     </label>
-                    <input type="date" name="dateOfBirth" id="dateOfBirth" class="date" value="{{ old('dateOfBirth') }}"/>
+                    <input type="text" name="dateOfBirth" id="dateOfBirth" class="date" value="{{ old('dateOfBirth') }}"/>
                 </p>
                 <p>
                     <label>Address *
@@ -104,7 +104,13 @@
                         @endforeach
                     </select>
                 </p>
-                
+        <p>
+                    <label>Group Leader 
+                    </label>
+                    <input type="checkbox" name="group_leader" id="group_leader">
+                </p>
+
+
    </fieldset>
 
    <fieldset class="row3">
@@ -126,7 +132,7 @@
         <input type="text" name="guarantor_phone" id="guarantor_phone" maxlength="11" value="{{ old('guarantor_phone') }}"/>
                 </p>
     </fieldset>
-    
+
 <div><button class="button">Submit &raquo;</button></div>
 </form>
 
@@ -141,8 +147,16 @@
 
 </div><!--/container-fluid-->
 
-@endsection
 
+
+<script>
+$('#dateOfBirth').datetimepicker({
+inline:false,timepicker: false,
+});
+</script>
+
+
+@endsection
 
 
 

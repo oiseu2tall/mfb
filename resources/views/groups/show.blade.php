@@ -32,7 +32,13 @@
      <div class="clearfix"></div>
 <div class="bot-border"></div><br>
 
-<div class="col-sm-5 col-xs-6 tital " >Group Leader:</div><div class="col-sm-7 col-xs-6 "></div>
+<div class="col-sm-5 col-xs-6 tital " >Group Leader:</div><div class="col-sm-7 col-xs-6 ">
+  @foreach($group->customers->sortByDesc('group_leader') as $leader)
+    @if($leader->group_leader == $group->id)
+    {{$leader->surname}} {{$leader->middle_name}} {{$leader->first_name}} 
+    @endif
+    @endforeach
+</div>
      <div class="clearfix"></div>
 <div class="bot-border"></div><br>
 
@@ -48,7 +54,7 @@
             ||($group->user_id == Auth::user()->id)||
                 (Auth::user()->can('isManager'))
                       )
-<a href="{{route('groups.edit', $group->id)}}" class="btn btn-info btn-sm mb-1">edit </a>&nbsp;<form onsubmit="return confirm('Are you sure you want to delete this group?')" method="post" action="{{route('groups.destroy', $group->id)}}">
+<a href="{{route('groups.edit', $group->id)}}" class="btn btn-info btn-sm mb-1">edit </a>&nbsp; <form onsubmit="return confirm('Are you sure you want to delete this group?')" method="post" action="{{route('groups.destroy', $group->id)}}">
           @csrf
           @method('delete')
           <button type="submit" class="btn btn-danger btn-sm mb-1">Delete</button> 
@@ -57,10 +63,11 @@
   </div>
            
         </div>
-            <div class="bg"></div>
 
+<hr>
 
-              <div class="left">
+            <div class="row">
+      <div class="col-xs-12">
 
 
 <h2>Customers in {{$group->name}} Group</h2>
@@ -73,7 +80,7 @@
             </tr>   
           </thead>
           <tbody>
-@foreach($group->customers->sortBy('card_number') as $customer)
+@foreach($group->customers->sortByDesc('group_leader') as $customer)
 
     <tr>
      <td>{{$customer->card_number}}</td>
