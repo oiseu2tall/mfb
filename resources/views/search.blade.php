@@ -24,6 +24,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
+              <th></th>
                 <th>SURNAME</th>
                 <th>MIDDLE NAME</th>
                 <th>FIRST NAME</th>
@@ -35,6 +36,12 @@
         <tbody>
             @foreach($details as $customer)
             <tr>
+              <td>
+                <a href="{{route('customers.show', $customer->id)}}">
+            <img src="{{ asset('images/'.$customer->image_name) }}" alt="Profile Picture" width="80" class="floated" /> </a>   
+
+              </td>
+
                 <td><a href="{{route('customers.show', $customer->id)}}">{{$customer->surname}}</a></td>
                 <td>{{$customer->middle_name}}</td>
                 <td>{{$customer->first_name}}</td>
