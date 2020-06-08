@@ -58,9 +58,9 @@
                 <legend>Other Details
                 </legend>
                 <p>
-                    <label>Date of birth *
+                    <label>Age *
                     </label>
-                    <input type="text" name="dateOfBirth" id="dateOfBirth" class="date" value="{{ old('dateOfBirth') }}"/>
+                    <input type="text" name="dateOfBirth" id="dateOfBirth" class="date" value="{{ old('dateOfBirth') }}" maxlength="2" minlength="2"/>
                 </p>
                 <p>
                     <label>Address *
@@ -150,9 +150,11 @@
 
 
 <script>
+    /**
 $('#dateOfBirth').datetimepicker({
 inline:false,timepicker: false,
 });
+**/
 </script>
 
 

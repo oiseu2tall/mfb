@@ -48,7 +48,7 @@
      <div class="clearfix"></div>
 <div class="bot-border"></div><br/>
 
-<div class="col-sm-5 col-xs-6 tital " >D.O.B:</div><div class="col-sm-7 col-xs-6 ">{{Carbon\Carbon::parse($customer->dateOfBirth)->toFormattedDateString()}}</div>
+<div class="col-sm-5 col-xs-6 tital " >AGE</div><div class="col-sm-7 col-xs-6 ">{{$customer->dateOfBirth}}</div>
      <div class="clearfix"></div>
 <div class="bot-border"></div><br/>
 
@@ -115,11 +115,16 @@
           @php 
           $balance = $credit->loan->principal;
           $x = $credit->loan->principal;
+          $y= 0;
           @endphp
 <tbody>          
 @foreach($customer->repayments->sortBy('payment_date') as $repayment)
 @if($repayment->loan_id == $credit->loan_id)
- @php $balance = $balance - $repayment->installment @endphp
+
+ @php
+ $y = $y + $repayment->savings; 
+ $balance = $balance - $repayment->installment - $repayment->savings;
+ @endphp
  
     <tr>
     <td><a href="{{route('repayments.show', $repayment->id)}}">{{Carbon\Carbon::parse($repayment->payment_date)->toFormattedDateString()}} </a></td>

@@ -60,9 +60,9 @@
                 <legend>Other Details
                 </legend>
                 <p>
-                    <label>Date of birth *
+                    <label>Age *
                     </label>
-<input type="text" name="dateOfBirth" id="dateOfBirth" value='{{$customer->dateOfBirth}}'/>
+<input type="text" name="dateOfBirth" id="dateOfBirth" maxlength="2" minlength="2" value='{{$customer->dateOfBirth}}'/>
                 </p>
                 <p>
                     <label>Address *
@@ -168,12 +168,6 @@
 
 </div><!--/container-fluid-->
 
-
-            <script>
-$('#dateOfBirth').datetimepicker({
-inline:false,timepicker: false,
-});
-</script>
 
 
 @endsection

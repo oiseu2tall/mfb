@@ -15,7 +15,7 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->Integer('card_number')->length(10);
+            $table->Integer('card_number')->length(11);
             $table->string('image_name', 100)->unique();
             $table->string('first_name', 100);
             $table->string('middle_name', 100)->nullable();
@@ -25,7 +25,7 @@ class CreateCustomersTable extends Migration
             $table->text('address');
             $table->string('phone', 20);
             $table->string('email', 50)->unique()->nullable();
-            $table->date('dateOfBirth');
+            $table->Integer('dateOfBirth')->length(11);
             $table->string('guarantor_name', 100);
             $table->text('guarantor_address');
             $table->string('guarantor_phone', 20);

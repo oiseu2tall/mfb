@@ -72,10 +72,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        
+       
        if(!Gate::allows('isAdmin')){
             abort(403,"Sorry, You don't have permission to create user");
         }
+
         return User::create([
             'name' => $data['name'],
             'first_name' => $data['first_name'],
