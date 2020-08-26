@@ -26,7 +26,7 @@
  
   <thead>
         <tr>
-          <td>CARD NO.</td>
+          <td>CARD</td>
           <td>NAME</td>
           <td>ALIAS</td>
           <td>PHONE</td>
